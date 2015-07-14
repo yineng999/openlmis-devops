@@ -60,4 +60,4 @@ Browse all the ansible roles in [Galaxy Ansible](https://galaxy.ansible.com/list
 Please find [install_via_galaxy_role.md](https://github.com/gongmingqm10/OpenLMIS-TechOps/blob/master/install_via_galaxy_roles.md)
 
 ### Issues you may occurred
-When your vagrant machine is running. Ansible will connect to your vagrant file for provision. If you get the error `Host key verification failed` during `vagrant up` or `vagrant provision`, please run the comand `ssh-keygen -R 192.168.33.10`, the IP address is what you set for vagrant machine in `Vagrantfile`.
+When your vagrant machine is running. Ansible will connect to your vagrant file for provision. If you get the error `Host key verification failed` during `vagrant up` or `vagrant provision`, please run the comand `ssh-keygen -R hostname`, the hostname is the address for your virtual machine, like `192.168.33.10`.
