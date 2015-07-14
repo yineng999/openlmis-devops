@@ -45,9 +45,19 @@ If your machine is already running, you want to provision again, just need to ru
 ##Supports
 
 ### Provision more dependencies
-If you want to add more dependencies to install. Find the awesome [Ansible Playbooks](https://github.com/snowplow/ansible-playbooks). You can find most common tools/dependencies. Copy the specific role under `ansible-playbooks/roles` to `OpenLMS-TechOps/provisioning/roles/`. And add the role to your `provisioning/playbook.yml`.
+If you want to add more dependencies to install.
+
+#### Install via ansible-playbooks
+
+Find the awesome [Ansible Playbooks](https://github.com/snowplow/ansible-playbooks). You can find most common tools/dependencies. Copy the specific role under `ansible-playbooks/roles` to `OpenLMS-TechOps/provisioning/roles/`. And add the role to your `provisioning/playbook.yml`.
 
 See example in this commit [Add karma to provision](https://github.com/gongmingqm10/OpenLMIS-TechOps/commit/d074174cd2285df6dc5ba64e27aaa033547f1211).
+
+#### Install via ansible-galaxy
+
+Browse all the ansible roles in [Galaxy Ansible](https://galaxy.ansible.com/list#/roles).
+
+Please find [install_via_galaxy_role.md](https://github.com/gongmingqm10/OpenLMIS-TechOps/blob/master/install_via_galaxy_roles.md)
 
 ### Issues you may occurred
 When your vagrant machine is running. Ansible will connect to your vagrant file for provision. If you get the error `Host key verification failed` during `vagrant up` or `vagrant provision`, please run the comand `ssh-keygen -R 192.168.33.10`, the IP address is what you set for vagrant machine in `Vagrantfile`.
