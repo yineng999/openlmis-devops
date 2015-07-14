@@ -16,7 +16,9 @@ Instead of installing these requirements one by one. Ansible can help us do the 
 ## Using Ansible with vagrant
 We want to keep the develop environment all the same. Vagrant provisioned with Ansible is a good choice.
 
-### Install Ansible in your local machine
+### Requirements for your local machine
+
+#### Install latest Ansible
 Before you use Ansible for provision. You should install Ansible in your local environment.
 
 Assuming your local machine is MacOS, install the latest releases via pip:
@@ -28,11 +30,24 @@ $ sudo pip install ansible
 
 Want to install in Ubuntu etc.? Read [Official instruction](http://docs.ansible.com/intro_installation.html)
 
+#### Install SSHPASS
+
+Ansible will use ssh to login your virtual machine. SSHPASS should be installed in advance.
+
+Read [SSHPASS install instruction] (https://gist.github.com/arunoda/7790979)
+
 ### Run your virtual machine
 
 Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install all packages you declared in `provisioning/playbook.yml` file.
 
 If your machine is already running, you want to provision again, just need to run `vagrant provision`. More vagrant commands read [here](http://docs.vagrantup.com/v2/cli/).
+
+##Supports
+
+### Provision more dependencies
+If you want to add more dependencies to install. Find the awesome [Ansible Playbooks](https://github.com/snowplow/ansible-playbooks). You can find most common tools/dependencies. Copy the specific role under `ansible-playbooks/roles` to `OpenLMS-TechOps/provisioning/roles/`. And add the role to your `provisioning/playbook.yml`.
+
+See example in this commit [Add karma to provision](https://github.com/gongmingqm10/OpenLMIS-TechOps/commit/d074174cd2285df6dc5ba64e27aaa033547f1211).
 
 ### Issues you may occurred
 When your vagrant machine is running. Ansible will connect to your vagrant file for provision. If you get the error `Host key verification failed` during `vagrant up` or `vagrant provision`, please run the comand `ssh-keygen -R 192.168.33.10`, the IP address is what you set for vagrant machine in `Vagrantfile`.
