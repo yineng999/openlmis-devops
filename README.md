@@ -28,9 +28,9 @@ $ sudo pip install ansible
 
 Want to install in Ubuntu etc.? Read [Official instruction](http://docs.ansible.com/intro_installation.html)
 
-### Run your machine
+### Run your virtual machine
 
-Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install everything you declared in `provisioning/playbook.yml` file.
+Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install all packages you declared in `provisioning/playbook.yml` file.
 
 If your machine is already running, you want to provision again, just need to run `vagrant provision`. More vagrant commands read [here](http://docs.vagrantup.com/v2/cli/).
 
