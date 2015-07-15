@@ -35,7 +35,7 @@ Install git `sudo apt-get install git`, and clone the [repo](https://github.com/
 
 ```
 $ cd provisioning
-$ sudo ansible-galaxy install -r requirement.txt --force
+$ sudo ansible-galaxy install -r galaxy-roles.txt --force
 ```
 
 ### Run Ansible
