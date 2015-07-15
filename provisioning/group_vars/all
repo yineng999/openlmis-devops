@@ -3,8 +3,10 @@ ansible_cache_dir: /var/cache/ansible # Need to update references to ansible cac
 software_install_dir: /usr/local/share
 user_binaries: /usr/local/bin
 
-# EC2 related variables
-instance_type: "c3.xlarge"
-security_groups: ['demo']
-region: eu-west-1
-image: { "m3.large": "ami-f4b11183", "c3.xlarge": "ami-f4b11183"}
+# Here are variables related to the Tomcat installation
+http_port: 8080
+https_port: 8443
+
+# This will configure a default manager-gui user:
+admin_username: admin
+admin_password: adminsecret
