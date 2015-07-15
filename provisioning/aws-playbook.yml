@@ -9,3 +9,4 @@
     - postgres
     - grunt
     - karma
+    - tomcat
