@@ -35,8 +35,3 @@
   tags: tomcat
   copy: src=server.xml dest=/etc/tomcat7/server.xml
   notify: restart tomcat
-
-- name: Restarting tomcat7
-  tags: tomcat
-  shell: /etc/init.d/tomcat7 restart
-  sudo: yes

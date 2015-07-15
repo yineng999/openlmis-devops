@@ -31,13 +31,6 @@ $ sudo apt-get install ansible
 
 Install git `sudo apt-get install git`, and clone the [repo](https://github.com/gongmingqm10/OpenLMIS-TechOps).
 
-### Install Galaxy Ansible roles
-
-```
-$ cd provisioning
-$ sudo ansible-galaxy install -r galaxy-roles.txt --force
-```
-
 ### Run Ansible
 
 ```
@@ -67,13 +60,6 @@ $ sudo apt-get install ansible
 ### Install git clone the techops repository
 
 Install git `sudo apt-get install git`, and clone the [repo](https://github.com/gongmingqm10/OpenLMIS-TechOps).
-
-### Install Galaxy Tomcat roles
-
-```
-$ cd provisioning
-$ ansible-galaxy install stumptownlabs.tomcat
-```
 
 ### Run Ansible
 
