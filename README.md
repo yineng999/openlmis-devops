@@ -62,7 +62,7 @@ You can install git via `sudo apt-get install git` or scp the `provisioning` dir
 
 ### Run Ansible
 
-Go to the provisioning directory and run `ansible-playbook playbook.yml --connection=local`
+Go to the provisioning directory and run `ansible-playbook aws-playbook.yml --connection=local`
 
 ##Supports
 
@@ -71,7 +71,7 @@ If you want to add more dependencies to install.
 
 #### Install via ansible-playbooks
 
-Find the awesome [Ansible Playbooks](https://github.com/snowplow/ansible-playbooks). You can find most common tools/dependencies. Copy the specific role under `ansible-playbooks/roles` to `OpenLMS-TechOps/provisioning/roles/`. And add the role to your `provisioning/playbook.yml`.
+Find the awesome [Ansible Playbooks](https://github.com/snowplow/ansible-playbooks). You can find most common tools/dependencies. Copy the specific role under `ansible-playbooks/roles` to `OpenLMS-TechOps/provisioning/roles/`. And add the role to your `provisioning/*-playbook.yml`.
 
 See example in this commit [Add karma to provision](https://github.com/gongmingqm10/OpenLMIS-TechOps/commit/d074174cd2285df6dc5ba64e27aaa033547f1211).
 

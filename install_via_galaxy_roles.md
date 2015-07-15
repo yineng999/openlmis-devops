@@ -47,4 +47,4 @@ After we finished roles installaton, below is what we declared in `playbook.yml`
 
 What's next? Follow the `README.md`, use it with vagrant.
 
-Further, you can run it with `ansible-playbook playbook.yml --connection=local`, but this will install all the package in local machine.
+Further, you can run it with `ansible-playbook *-playbook.yml --connection=local`, but this will install all the package in local machine.
