@@ -3,11 +3,10 @@
   sudo: yes
   roles:
     - base
-    - oracle-java
+    - { role: alexanderjardim.tomcat }
     - nodejs
     - gradle
     - postgres
     - grunt
     - karma
-    - { role: alexanderjardim.tomcat }
     - { role: geerlingguy.jenkins }
