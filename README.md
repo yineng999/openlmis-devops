@@ -42,28 +42,6 @@ Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will
 
 If your machine is already running, you want to provision again, just need to run `vagrant provision`. More vagrant commands read [here](http://docs.vagrantup.com/v2/cli/).
 
-### Ansible your AWS
-
-You can provision AWS machines use Ansible.
-
-
-### Install Ansible in AWS machine.
-Assuming the AWS machine is ubuntu, install it via:
-
-```
-$ sudo apt-get install software-properties-common
-$ sudo apt-add-repository ppa:ansible/ansible
-$ sudo apt-get update
-$ sudo apt-get install ansible
-```
-### Install git or scp to get the provisioning directory
-
-You can install git via `sudo apt-get install git` or scp the `provisioning` directory to your AWS machine.
-
-### Run Ansible
-
-Go to the provisioning directory and run `ansible-playbook aws-playbook.yml --connection=local`
-
 ##Supports
 
 ### Provision more dependencies

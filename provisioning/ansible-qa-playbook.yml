@@ -1,0 +1,9 @@
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - base
+    - oracle-java
+    - gradle
+    - postgres
+    - { role: alexanderjardim.tomcat }

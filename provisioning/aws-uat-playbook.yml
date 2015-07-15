@@ -9,4 +9,5 @@
     - postgres
     - grunt
     - karma
-    - tomcat
+    - { role: alexanderjardim.tomcat }
+    - { role: geerlingguy.jenkins }
