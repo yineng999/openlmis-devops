@@ -29,10 +29,12 @@
 - name: Copy tomcat-users.xml to /etc/tomcat7
   tags: tomcat
   copy: src=tomcat-users.xml dest=/etc/tomcat7/tomcat-users.xml
+  notify: restart tomcat
 
 - name: Copy server.xml /etc/tomcat7
   tags: tomcat
   copy: src=server.xml dest=/etc/tomcat7/server.xml
+  notify: restart tomcat
 
 - name: Restarting tomcat7
   tags: tomcat
