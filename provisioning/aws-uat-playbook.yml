@@ -9,4 +9,4 @@
     - postgres
     - grunt
     - karma
-    - { role: geerlingguy.jenkins }
+    - ansible-role-jenkins
