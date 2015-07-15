@@ -1,2 +1,2 @@
 geerlingguy.jenkins
-alexanderjardim.tomcat
+stumptownlabs.tomcat

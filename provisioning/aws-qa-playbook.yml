@@ -3,5 +3,5 @@
   sudo: yes
   roles:
     - base
-    - { role: alexanderjardim.tomcat }
+    - { role: stumptownlabs.tomcat }
     - postgres

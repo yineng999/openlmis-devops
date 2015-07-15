@@ -3,7 +3,7 @@
   sudo: yes
   roles:
     - base
-    - { role: alexanderjardim.tomcat }
+    - { role: stumptownlabs.tomcat }
     - nodejs
     - gradle
     - postgres

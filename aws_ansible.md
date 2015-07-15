@@ -72,7 +72,7 @@ Install git `sudo apt-get install git`, and clone the [repo](https://github.com/
 
 ```
 $ cd provisioning
-$ ansible-galaxy install alexanderjardim.tomcat
+$ ansible-galaxy install stumptownlabs.tomcat
 ```
 
 ### Run Ansible
