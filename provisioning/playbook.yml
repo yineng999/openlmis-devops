@@ -9,5 +9,3 @@
     - postgres
     - grunt
     - karma
-    - selinux
-    - tomcat
