@@ -1,0 +1,37 @@
+---
+# tasks file for stumptownlabs.tomcat
+
+- name: Assert platform is supported
+  tags: tomcat
+  assert:
+    that:
+      - ansible_os_family in ['Ubuntu', 'Debian']
+
+- name: Ensure apache2 is installed
+  tags: tomcat
+  apt: pkg=apache2 state=installed
+
+- name: Ensure apache2 is running
+  tags: tomcat
+  service: name=apache2 state=started
+
+- name: Install tomcat7
+  tags: tomcat
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - tomcat7
+    - tomcat7-admin
+
+- name: Ensure tomcat7 is running
+  tags: tomcat
+  service: name=tomcat7 state=started
+
+- name: Copy tomcat-users.xml to /etc/tomcat7
+  tags: tomcat
+  copy: src=tomcat-users.xml dest=/etc/tomcat7/tomcat-users.xml
+  notify: restart tomcat
+
+- name: Copy server.xml /etc/tomcat7
+  tags: tomcat
+  copy: src=server.xml dest=/etc/tomcat7/server.xml
+  notify: restart tomcat

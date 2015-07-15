@@ -3,5 +3,5 @@
   sudo: yes
   roles:
     - base
-    - { role: stumptownlabs.tomcat }
+    - ansible-tomcat
     - postgres
