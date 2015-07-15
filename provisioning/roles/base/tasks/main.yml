@@ -4,7 +4,8 @@
       sudo: yes
 
     - name: Update all packages
-      shell: sudo apt-get dist-upgrade
+      apt: upgrade=dist
+      sudo: yes
 
     - name: install basic packages
       sudo: yes
