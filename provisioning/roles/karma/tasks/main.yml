@@ -2,11 +2,14 @@
 - name: install karma
   npm: name=karma global=yes
   sudo: yes
+  ignore_errors: yes
 
 - name: install karma-coverage
   npm: name=karma-coverage global=yes
   sudo: yes
+  ignore_errors: yes
 
 - name: install karma-cli
   npm: name=karma-cli global=yes
   sudo: yes
+  ignore_errors: yes

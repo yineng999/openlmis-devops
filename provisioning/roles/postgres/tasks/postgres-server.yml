@@ -1,5 +1,5 @@
 ---
-- name: Checking postgres is installed
+- name: check postgres is installed
   shell: /usr/bin/test "$(which psql 2> /dev/null)" = /usr/bin/psql
   register: wanted_version_installed
   failed_when: wanted_version_installed.rc > 1
