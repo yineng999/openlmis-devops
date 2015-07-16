@@ -1,6 +1,6 @@
 ---
 - name: Checking installed version of gradle
-  shell: /usr/bin/test "$(which gradle 2> /dev/null)" = /usr/local/bin/gradle1
+  shell: /usr/bin/test "$(which gradle 2> /dev/null)" = /usr/local/bin/gradle
   register: wanted_version_installed
   failed_when: wanted_version_installed.rc > 1
 

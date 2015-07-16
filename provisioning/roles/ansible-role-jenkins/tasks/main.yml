@@ -33,4 +33,4 @@
   changed_when: false
 
 # Update Jenkins and install configured plugins.
-- include: plugins.yml
+# - include: plugins.yml
