@@ -34,7 +34,7 @@ Install git `sudo apt-get install git`, and clone the [repo](https://github.com/
 ### Run Ansible
 
 ```
-ansible-playbook aws-uat-playbook.yml --connection=local
+ansible-playbook aws-uat-playbook.yml
 ```
 
 ## For QA environment
@@ -64,5 +64,5 @@ Install git `sudo apt-get install git`, and clone the [repo](https://github.com/
 ### Run Ansible
 
 ```
-ansible-playbook aws-qa-playbook.yml --connection=local
+ansible-playbook aws-qa-playbook.yml
 ```
