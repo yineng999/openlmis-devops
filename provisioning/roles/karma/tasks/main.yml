@@ -1,4 +1,8 @@
 ---
-- name: Karma | Karma install
-  shell: npm install -g karma karma-cli karma-coverage
+- name: Karma | install karma and karma-coverage
+  shell: npm install -g karma karma-coverage
+  sudo: yes
+
+- name: Karma | install karma-cli
+  shell: npm install -g karma-cli
   sudo: yes
