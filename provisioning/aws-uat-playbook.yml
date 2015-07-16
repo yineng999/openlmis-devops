@@ -10,3 +10,4 @@
     - grunt
     - karma
     - ansible-role-jenkins
+    - android
