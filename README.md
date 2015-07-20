@@ -40,7 +40,11 @@ Read [SSHPASS install instruction] (https://gist.github.com/arunoda/7790979)
 
 Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install all packages you declared in `provisioning/playbook.yml` file.
 
+Note: If your Internet connection is slow, get the box LMIS-2.0.box from Danni and run `vagrant box add openlmis-box LMIS-2.0.box`.
+
 If your machine is already running, you want to provision again, just need to run `vagrant provision`. More vagrant commands read [here](http://docs.vagrantup.com/v2/cli/).
+
+To ssh into your box, run `vagrant ssh`.
 
 ##Supports
 
