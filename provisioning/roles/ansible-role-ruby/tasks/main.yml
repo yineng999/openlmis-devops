@@ -13,11 +13,14 @@
 # Install Bundler and configured gems.
 - name: Install Bundler.
   gem: name=bundler state=present user_install=no
+  sudo: yes
 
 - name: Add bundle symlink.
   file: src=/usr/local/bin/bundle dest=/usr/bin/bundle state=link
   when: ruby_install_from_source == true
+  sudo: yes
 
 - name: Install configured gems.
   gem: "name={{ item }} state=present"
   with_items: ruby_install_gems
+  sudo: yes
