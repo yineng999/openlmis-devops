@@ -12,3 +12,4 @@
     - karma
     - ansible-role-jenkins
     - android
+    - ansible-role-ruby
