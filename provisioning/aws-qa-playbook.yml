@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  conection: local
+  connection: local
   sudo: yes
   roles:
     - base
