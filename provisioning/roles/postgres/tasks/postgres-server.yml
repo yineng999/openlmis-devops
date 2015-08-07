@@ -1,0 +1,17 @@
+---
+- name: check postgres is installed
+  shell: /usr/bin/test "$(which psql 2> /dev/null)" = /usr/bin/psql
+  register: wanted_version_installed
+  failed_when: wanted_version_installed.rc > 1
+
+- name: install postgresql packages
+  sudo: yes
+  apt: pkg={{ item }} state=installed update_cache=yes
+  tags: [packages]
+  with_items:
+    - "postgresql-{{ postgres_version }}"
+    - libpq-dev
+    - "postgresql-contrib-{{ postgres_version }}"
+    - libxslt-dev
+    - libxml2-dev
+  when: wanted_version_installed.rc == 1

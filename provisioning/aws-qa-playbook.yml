@@ -1,0 +1,8 @@
+---
+- hosts: all
+  connection: local
+  sudo: yes
+  roles:
+    - base
+    - ansible-tomcat
+    - postgres

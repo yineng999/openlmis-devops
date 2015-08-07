@@ -1,0 +1,15 @@
+---
+- hosts: all
+  connection: local
+  sudo: yes
+  roles:
+    - base
+    - ansible-tomcat
+    - nodejs
+    - gradle
+    - postgres
+    - grunt
+    - karma
+    - ansible-role-jenkins
+    - android
+    - ansible-role-ruby

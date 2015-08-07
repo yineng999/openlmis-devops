@@ -1,0 +1,12 @@
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - base
+    - oracle-java
+    - nodejs
+    - gradle
+    - postgres
+    - grunt
+    - karma
+    - projects

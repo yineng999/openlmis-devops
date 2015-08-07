@@ -1,0 +1,5 @@
+---
+- name: Grunt | Grunt CLI install
+  npm: name=grunt-cli global=yes
+  sudo: yes
+  ignore_errors: yes
