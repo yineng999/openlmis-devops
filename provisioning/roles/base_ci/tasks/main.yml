@@ -1,4 +1,4 @@
----
+main.yml---
     - name: Update apt cache
       apt: update-cache=yes cache_valid_time=86400
       sudo: yes
@@ -10,11 +10,15 @@
       with_items:
         - curl
         - vim
+        - libxslt1-dev
+        - libxml2-dev
         - zip
         - unzip
-
-    - name: Install Java 1.7
-      apt: pkg=openjdk-7-jdk state=present
+        - python-pip
+        - python-psycopg2
+        - apg
+        - mercurial
+        - git
 
     - name: Ensure that ansible_cache_dir directory exists
       file: path={{ ansible_cache_dir }} state=directory

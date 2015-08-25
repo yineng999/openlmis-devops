@@ -1,17 +1,21 @@
 #Ansible Scripts for Open LMIS
 
-This provision project is build for [elmis](https://github.com/USAID-DELIVER-PROJECT/elmis) project.
+This provision project is build for https://github.com/OpenLMIS/open-lmis/tree/2.0 project.
 
 ##System requirements
 * JDK 7
 * Postgresql 9
 * Git
-* Gradle 2.3
+* Gradle
 * Nodejs
 * Grunt CLI
 * Karma
 
 Instead of installing these requirements one by one. Ansible can help us do the annoying jobs for us. Here are some instructions.
+
+## Provision QA server
+run `ansible-playbook -i provisioning/hosts --private-key ~/.ssh/LMIS-CI.pem provisioning/aws-qa-playbook.yml`
+Make sure your local ssh config is set up to use the QA host and user.
 
 ## Using Ansible with vagrant
 We want to keep the develop environment all the same. Vagrant provisioned with Ansible is a good choice.

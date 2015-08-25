@@ -4,7 +4,7 @@
   sudo: yes
   roles:
     - base
-    - ansible-tomcat
+    - tomcat
     - nodejs
     - gradle
     - postgres

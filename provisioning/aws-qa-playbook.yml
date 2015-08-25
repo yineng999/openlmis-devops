@@ -1,8 +1,7 @@
 ---
 - hosts: all
-  connection: local
+  connection: ssh
   sudo: yes
   roles:
     - base
-    - ansible-tomcat
-    - postgres
+    - tomcat

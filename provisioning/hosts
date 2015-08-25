@@ -1,0 +1,8 @@
+[remote:children]
+qa
+
+[servers:children]
+qa
+
+[qa]
+54.65.193.141 nickname=qa vm=1
