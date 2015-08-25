@@ -1,0 +1,10 @@
+---
+ansible_cache_dir: /var/cache/ansible # Need to update references to ansible cache to use this variable
+software_install_dir: /usr/local/share
+user_binaries: /usr/local/bin
+
+http_port: 8080
+https_port: 8443
+
+dbname: openlmis
+dbuser: open_lmis

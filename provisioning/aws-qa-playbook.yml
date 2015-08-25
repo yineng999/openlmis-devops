@@ -1,7 +1,8 @@
 ---
-- hosts: all
+- hosts: qa
   connection: ssh
   sudo: yes
   roles:
     - base
     - tomcat
+    - postgres

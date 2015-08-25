@@ -1,45 +1,23 @@
 ---
-# - include: add-apt-repo-for-postgres.yml
-# - include: psql-client.yml
-# - include: postgres-server.yml
-#   when: install_postgres_server
-#
-- name: check postgres is installed
-  shell: /usr/bin/test "$(which psql 2> /dev/null)" = /usr/bin/psql
-  register: wanted_version_installed
-  failed_when: wanted_version_installed.rc > 1
+- include: add-apt-repo-for-postgres.yml
 
-- name: Add Postgres repo to sources list
-  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' state=present
-  sudo: yes
-  when: wanted_version_installed.rc == 1
-
-- name: Add key for Postgres repo
-  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
-  sudo: yes
-  when: wanted_version_installed.rc == 1
-
-- name: install postgresql packages
-  sudo: yes
-  apt: pkg={{ item }} state=installed update_cache=yes
-  tags: [packages]
+- name: Install postgresql
+  apt: pkg={{item}} state=present update_cache=yes cache_valid_time=3600 force=yes
   with_items:
-    - "postgresql-client-{{ postgres_version }}"
-  when: wanted_version_installed.rc == 1
-
-- name: install postgresql packages
-  sudo: yes
-  apt: pkg={{ item }} state=installed update_cache=yes
-  tags: [packages]
-  with_items:
-    - "postgresql-{{ postgres_version }}"
     - libpq-dev
-    - "postgresql-contrib-{{ postgres_version }}"
-    - libxslt-dev
-    - libxml2-dev
-  when: wanted_version_installed.rc == 1
+    - postgresql-client
+    - postgresql-contrib-{{ postgres_version }}
+    - postgresql-{{ postgres_version }}
+    - python-psycopg2
 
+- name: Ensure database is created
+  postgresql_db: name={{dbname}}
+  sudo_user: postgres
 
+- name: Ensure user has access to database
+  postgresql_user: db={{dbname}} name={{dbuser}} password={{DBPASSWORD}} priv=ALL
+  sudo_user: postgres
 
-
-# To do - add tasks to create a login on the local postgres db for user: Vagrant
+- name: Ensure user does not have unnecessary privilege
+  postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  sudo_user: postgres
