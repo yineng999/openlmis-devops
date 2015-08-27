@@ -1,9 +1,9 @@
 ---
-- hosts: local
-  connection: local
+- hosts: ci
+  connection: ssh
   sudo: yes
   roles:
-    - base
+    - base_ci
     - tomcat
     - nodejs
     - gradle
