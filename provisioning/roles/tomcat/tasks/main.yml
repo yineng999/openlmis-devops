@@ -1,40 +1,65 @@
 ---
-- name: add group "middleware"
-  group: name=middleware
+- name: Step 1 > Download Tomcat
+  get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
 
-- name: add user "middleware"
-  user: name=middleware group=middleware home=/usr/share/tomcat createhome=no
+- name: Step 2 > Extract archive
+  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
+
+- name: Step 3 > Symlink install directory
+  file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
+
+- name: Step 4 > Add  group "middleware"
+  group: name=middleware
   sudo: True
 
-- name: initialize the dirctories of application
+- name: Step 4 > Add user "middleware"
+  user: name=middleware group=middleware home=/app/tomcat createhome=no
+  sudo: True
+
+- name: Step 5 > Change ownership of Tomcat installation
+  file: path=/usr/share/tomcat/ owner=middleware group=middleware state=directory recurse=yes
+
+- name: Step 6 > Initialize the dirctories of tomcat instance
+  tags: tomcat
+  file: path=/app/tomcat/server/{{ item }} owner=middleware group=middleware mode=0755 state=directory
+  with_items:
+         - temp
+         - logs
+         - work
+         - webapps
+         - conf
+
+- name: Step 7 > Initialize the dirctories of application 1
   tags: tomcat
   file: path=/app/tomcat/openlmis/{{ item }} owner=middleware group=middleware mode=0755 state=directory
   with_items:
-       - webapps
-       - logs
        - properties
 
-- name: Download Tomcat
-  get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
+- name: Step 7 > Initialize the dirctories of application 2
+  tags: tomcat
+  file: src=/app/tomcat/server/{{ item }} dest=/app/tomcat/openlmis/{{ item }} owner=middleware group=middleware state=link
+  with_items:
+      - logs
+      - webapps
 
-- name: Extract archive
-  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
 
-- name: Symlink install directory
-  file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
+- name: Step 8 > Configure Tomcat server 1
+  copy: src={{ item }} dest=/app/tomcat/server/conf owner=middleware group=middleware mode=0644
+  with_items:
+         - server.xml
+         - web.xml
 
-- name: Change ownership of Tomcat installation
-  file: path=/usr/share/tomcat/ owner=middleware group=middleware state=directory recurse=yes
+- name: Step 9 > Copy the default application
+  command: cp -R /opt/apache-tomcat-7.0.61/webapps/ROOT /app/tomcat/openlmis/webapps/
+  sudo_user: middleware
 
-- name: Configure Tomcat server
-  template: src=server.xml dest=/usr/share/tomcat/conf/
-  notify: restart tomcat
-
-- name: Install Tomcat init script
+- name: Step 10 > Setup the env variables
+  copy: src=setenv.sh dest=/opt/apache-tomcat-7.0.61/bin owner=middleware group=middleware mode=0755
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
-- name: Start Tomcat
+- name: Step 11 > Start Tomcat
   service: name=tomcat state=started enabled=yes
 
-- name: wait for tomcat to start
+
+- name: Step 12 > verify for tomcat to start
   wait_for: port={{ http_port }}

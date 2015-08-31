@@ -15,7 +15,7 @@
 #
 
 #Location of JAVA_HOME (bin files)
-export JAVA_HOME=/usr/lib/jvm/jre
+export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
 
 #Add Java binary files to PATH
 export PATH=$JAVA_HOME/bin:$PATH
@@ -24,7 +24,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CATALINA_HOME=/usr/share/tomcat
 
 #CATALINA_BASE is the location of the configuration files of this instance of Tomcat
-export CATALINA_BASE=/usr/share/tomcat
+export CATALINA_BASE=/app/tomcat/server
 
 #TOMCAT_USER is the default user of tomcat
 export TOMCAT_USER=middleware
