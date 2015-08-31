@@ -58,7 +58,7 @@
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
 - name: Step 11 > Start Tomcat
-  service: name=tomcat state=started enabled=yes
+  service: name=tomcat state=restarted enabled=yes
 
 
 - name: Step 12 > verify for tomcat to start
