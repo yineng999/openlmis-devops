@@ -1,14 +1,18 @@
 [remote:children]
 qa
 ci
+db
 
 [servers:children]
 qa
 ci
-
+db
 
 [qa]
 52.68.164.8 nickname=qa vm=1
 
 [ci]
 52.69.124.32 nickname=ci vm=1
+
+[db]
+52.68.164.8 nickname=db vm=1

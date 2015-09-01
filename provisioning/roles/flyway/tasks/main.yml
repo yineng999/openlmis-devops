@@ -3,11 +3,6 @@
        dest=/opt/devops
        version=2.0-moz
 
-- name: setup database schema
-  git: repo=https://github.com/OpenLMIS/open-lmis.git
-       dest=/opt/devops
-       version=2.0-moz
-
 
 - name: download flyway command line tool and install
   command:  curl -O http://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/3.2.1/flyway-commandline-3.2.1.tar.gz

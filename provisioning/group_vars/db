@@ -1,0 +1,5 @@
+---
+postgres_version: 9.4
+dbname: open_lmis
+dbuser: openlmis
+install_postgres_server: true

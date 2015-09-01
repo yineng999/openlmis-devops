@@ -4,4 +4,4 @@
   sudo: yes
   roles:
     - base
-    - tomcat
+    - postgres
