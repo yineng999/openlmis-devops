@@ -11,3 +11,5 @@ https_port: 8443
 
 dbname: openlmis
 dbuser: open_lmis
+
+postgres_version: 9.4

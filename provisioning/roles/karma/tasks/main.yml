@@ -13,3 +13,8 @@
   npm: name=karma-cli global=yes
   sudo: yes
   ignore_errors: yes
+
+- name: install lxde
+  npm: name=lxde global=yes
+  sudo: yes
+  ignore_errors: yes

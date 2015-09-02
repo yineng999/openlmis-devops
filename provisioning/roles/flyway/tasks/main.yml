@@ -1,11 +1,31 @@
-- name: setup database schema
-  git: repo=https://github.com/OpenLMIS/open-lmis.git
-       dest=/opt/devops
-       version=2.0-moz
+- name: Step 1 > Initialize the dirctories of db script
+  tags: flyway
+  file: path={{application_dir}}/db owner=postgres group=postgres mode=0755 state=directory
+  sudo_user: postgres
+
+- name: Step 2 > Install flyway on server
+  copy: src=flyway/ dest={{flyway_install_dir}}
 
 
-- name: download flyway command line tool and install
-  command:  curl -O http://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/3.2.1/flyway-commandline-3.2.1.tar.gz
+- name: Step 3 > Copy configuration file
+  template: src=flyway.properties dest={{flyway_install_dir}}/conf/flyway.conf
 
-- name: Extract archive
-  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
+- name: Step 4 > Make the flyway command  executable
+  shell: chmod +x /{{flyway_install_dir}}/flyway
+
+- name: Step 5 > change owner
+  command: "psql -c 'alter schema public owner to openlmis' -d open_lmis"
+  sudo_user: postgres
+
+- name: Step 6 > Create schema
+  command: "{{flyway_install_dir}}/flyway
+  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -schemas=public,atomfeed
+  -user={{dbuser}}
+  -password={{DBPASSWORD}}
+  -table=schema_version
+  -X
+  migrate"
+
+
+
