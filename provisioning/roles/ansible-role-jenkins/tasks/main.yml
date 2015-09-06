@@ -13,6 +13,9 @@
     jenkins_repo_key_url: "{{ __jenkins_repo_key_url }}"
   when: jenkins_repo_key_url is not defined
 
+- name: Copy env setting file
+  template: src=bashrc dest='/var/lib/jenkins/.bashrc'
+
 # Setup/install tasks.
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
@@ -25,12 +28,11 @@
   service: name=jenkins state=started enabled=yes
 
 - name: Wait for Jenkins to start up before proceeding.
-  shell: curl --head --silent http://{{ jenkins_hostname }}:8888/cli/
+  shell: curl --head --silent http://{{ jenkins_hostname }}:8080/cli/
   register: result
   until: result.stdout.find("200 OK") != -1
-  retries: "{{ jenkins_connection_retries }}"
-  delay: "{{ jenkins_connection_delay }}"
   changed_when: false
+
 
 # Update Jenkins and install configured plugins.
 # - include: plugins.yml

@@ -1,0 +1,15 @@
+---
+- hosts: ci
+  connection: ssh
+  sudo: yes
+  roles:
+    - base_ci
+    - tomcat
+    - nodejs
+    - gradle
+    - postgres
+    - grunt
+    - karma
+    - ansible-role-jenkins
+    - android
+    - ansible-role-ruby

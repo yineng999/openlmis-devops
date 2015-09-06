@@ -1,0 +1,11 @@
+export FIREFOX_BIN=/usr/bin/firefox
+export JAVA_OPTS="-DenvironmentName=local -DdefaultLocale=en"
+export ANDROID_HOME=/opt/android-sdk-linux
+export ANDROID_TOOLS=$ANDROID_HOME/tools/
+export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools/
+export PATH=$PATH:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS
+export JAVA_OPTS="-XX:MaxPermSize=512m"
+export JAVA_TOOL_OPTIONS="-Xmx1024m -XX:MaxPermSize=512m -Xms512m"
+
+
+export PGPASSWORD={{DBPASSWORD}}
