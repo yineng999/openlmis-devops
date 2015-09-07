@@ -1,15 +1,8 @@
 ---
-- hosts: ci
+- hosts: local
   connection: ssh
-  sudo: yes
   roles:
-    - base_ci
+    - base
     - tomcat
-    - nodejs
-    - gradle
     - postgres
-    - grunt
-    - karma
-    - ansible-role-jenkins
-    - android
-    - ansible-role-ruby
+    - flyway

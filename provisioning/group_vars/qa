@@ -8,3 +8,5 @@ application_name: openlmis
 
 http_port: 8000
 https_port: 8443
+jenkins_user: user_ansible
+jenkins_host: 54.65.91.139:8080

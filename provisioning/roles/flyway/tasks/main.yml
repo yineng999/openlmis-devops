@@ -1,7 +1,7 @@
 - name: Step 1 > Initialize the dirctories of db script
   tags: flyway
-  file: path={{application_dir}}/db owner=postgres group=postgres mode=0755 state=directory
-  sudo_user: postgres
+  file: path={{application_dir}}/db owner=middleware group=middleware mode=0755 state=directory
+
 
 - name: Step 2 > Install flyway on server
   copy: src=flyway/ dest={{flyway_install_dir}}
@@ -11,21 +11,67 @@
   template: src=flyway.properties dest={{flyway_install_dir}}/conf/flyway.conf
 
 - name: Step 4 > Make the flyway command  executable
-  shell: chmod +x /{{flyway_install_dir}}/flyway
+  shell: chmod +x {{flyway_install_dir}}/flyway
 
-- name: Step 5 > change owner
-  command: "psql -c 'alter schema public owner to openlmis' -d open_lmis"
-  sudo_user: postgres
 
-- name: Step 6 > Create schema
+- name: Step 5 > Download db script
+  command: "wget -O {{application_dir}}/db/{{item}}.jar --auth-no-challenge --http-user={{jenkins_user}}
+      --http-password=b5c5990592a49e0df211b0e704d3bdd0
+      http://{{jenkins_host}}/view/web-pipeline/job/web-build/4/artifact/modules/{{item}}/build/libs/{{item}}.jar"
+  with_items:
+      - db
+      - migration
+
+- name: Step 6 > Initialize the dirctories of sql instance
+  command: rm -rf {{flyway_install_dir}}/sql/{{item}}
+  with_items:
+      - db
+      - migration
+
+- name: Step 6 > Initialize the dirctories of sql instance
+  file: path={{flyway_install_dir}}/sql/{{item}} mode=0755 state=directory
+  with_items:
+      - db
+      - migration
+
+- name: Step 7 > Unzip Sql file jar
+  command: "unzip {{application_dir}}/db/{{item}}.jar -d {{flyway_install_dir}}/sql/{{item}}"
+  with_items:
+      - db
+      - migration
+
+- name: Step 8 > migrate db module
   command: "{{flyway_install_dir}}/flyway
   -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
   -schemas=public,atomfeed
   -user={{dbuser}}
   -password={{DBPASSWORD}}
   -table=schema_version
+  -placeholderReplacement=false
+  -locations=filesystem:{{flyway_install_dir}}/sql/db
   -X
   migrate"
 
+- name: Step 9 > Baseline migration module
+  command: "{{flyway_install_dir}}/flyway
+  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -schemas=public,atomfeed
+  -user={{dbuser}}
+  -password={{DBPASSWORD}}
+  -table=migration_schema_version
+  -placeholderReplacement=false
+  -locations=filesystem:{{flyway_install_dir}}/sql/migration
+  -X
+  baseline"
 
-
+- name: Step 10 > migrate migration module
+  command: "{{flyway_install_dir}}/flyway
+  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -schemas=public,atomfeed
+  -user={{dbuser}}
+  -password={{DBPASSWORD}}
+  -table=migration_schema_version
+  -placeholderReplacement=false
+  -locations=filesystem:{{flyway_install_dir}}/sql/migration
+  -X
+  migrate"

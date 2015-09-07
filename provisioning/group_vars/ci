@@ -14,5 +14,3 @@ dbuser: openlmis
 
 postgres_version: 9.4
 install_postgres_server: true
-jenkins_user: user-ansible
-jenkins_host: 52.69.124.32:8000

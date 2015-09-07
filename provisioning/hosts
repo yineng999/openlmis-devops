@@ -2,6 +2,7 @@
 qa
 ci
 db
+local
 
 [servers:children]
 qa
@@ -9,10 +10,13 @@ ci
 db
 
 [qa]
-52.68.164.8 nickname=qa vm=1
+54.64.34.198 nickname=qa vm=1
 
 [ci]
 54.65.91.139 nickname=ci vm=1
 
 [db]
-52.68.164.8 nickname=db vm=1
+54.64.34.198 nickname=db vm=1
+
+[local]
+54.64.34.198 nickname=db vm=1
