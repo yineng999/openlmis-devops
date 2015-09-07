@@ -6,3 +6,5 @@
     - tomcat
     - postgres
     - flyway
+  vars:
+    region: local

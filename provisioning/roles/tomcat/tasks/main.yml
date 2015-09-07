@@ -13,14 +13,14 @@
   group: name=middleware
   sudo: True
 
-- name: Step 4 > Add user "middleware"
+- name: Step 5 > Add user "middleware"
   user: name=middleware group=middleware home={{application_dir}} createhome=no
   sudo: True
 
-- name: Step 5 > Change ownership of Tomcat installation
+- name: Step 6 > Change ownership of Tomcat installation
   file: path=/usr/share/tomcat/ owner=middleware group=middleware state=directory recurse=yes
 
-- name: Step 6 > Initialize the dirctories of tomcat instance
+- name: Step 7 > Initialize the dirctories of tomcat instance
   tags: tomcat
   file: path={{application_dir}}/server/{{ item }} owner=middleware group=middleware mode=0755 state=directory
   with_items:
@@ -30,13 +30,13 @@
          - webapps
          - conf
 
-- name: Step 7 > Initialize the dirctories of application 1
+- name: Step 8 > Initialize the dirctories of application 1
   tags: tomcat
   file: path={{application_dir}}/{{application_name}}/{{ item }} owner=middleware group=middleware mode=0755 state=directory
   with_items:
        - properties
 
-- name: Step 7 > Initialize the dirctories of application 2
+- name: Step 9 > Initialize the dirctories of application 2
   tags: tomcat
   file: src={{application_dir}}/server/{{ item }} dest={{application_dir}}/{{application_name}}/{{ item }} owner=middleware group=middleware state=link
   with_items:
@@ -44,23 +44,25 @@
       - webapps
 
 
-- name: Step 8 > Configure Tomcat server
+- name: Step 10 > Configure Tomcat server
   copy: src={{ item }} dest={{application_dir}}/server/conf owner=middleware group=middleware mode=0644
   with_items:
          - server.xml
          - web.xml
 
-- name: Step 9 > Copy the default application
+- name: Step 11 > Copy the default application
   command: cp -R {{tomcat_install_dir}}/webapps/ROOT {{application_dir}}/{{application_name}}/webapps/
   sudo_user: middleware
 
-- name: Step 10 > Setup the env variables
-  copy: src=setenv.sh dest={{tomcat_install_dir}}/bin owner=middleware group=middleware mode=0755
-  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+- name: Step 12 > Setup the env variables
+  template: src=setenv.sh dest={{tomcat_install_dir}}/bin/setenv.sh owner=middleware group=middleware mode=0755
 
-- name: Step 11 > Start Tomcat
+- name: Step 13 > Setup the service
+  template: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+
+- name: Step 14 > Start Tomcat
   service: name=tomcat state=restarted enabled=yes
 
 
-- name: Step 12 > verify for tomcat to start
+- name: Step 15 > verify for tomcat to start
   wait_for: port={{ http_port }}

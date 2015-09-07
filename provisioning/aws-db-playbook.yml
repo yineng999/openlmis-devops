@@ -3,6 +3,6 @@
   connection: ssh
   sudo: yes
   roles:
-    - base
-    - postgres
     - flyway
+  vars:
+    region: local
