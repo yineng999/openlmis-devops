@@ -28,19 +28,19 @@
       - db
       - migration
 
-- name: Step 6 > Initialize the dirctories of sql instance
+- name: Step 7 > Initialize the dirctories of sql instance
   file: path={{flyway_install_dir}}/sql/{{item}} mode=0755 state=directory
   with_items:
       - db
       - migration
 
-- name: Step 7 > Unzip Sql file jar
+- name: Step 8 > Unzip Sql file jar
   command: "unzip {{application_dir}}/db/{{item}}.jar -d {{flyway_install_dir}}/sql/{{item}}"
   with_items:
       - db
       - migration
 
-- name: Step 8 > migrate db module
+- name: Step 9 > migrate db module
   command: "{{flyway_install_dir}}/flyway
   -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
   -schemas=public,atomfeed
@@ -52,18 +52,6 @@
   -X
   migrate"
 
-- name: Step 9 > Baseline migration module
-  command: "{{flyway_install_dir}}/flyway
-  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
-  -schemas=public,atomfeed
-  -user={{dbuser}}
-  -password={{DBPASSWORD}}
-  -table=migration_schema_version
-  -placeholderReplacement=false
-  -locations=filesystem:{{flyway_install_dir}}/sql/migration
-  -X
-  baseline"
-
 - name: Step 10 > migrate migration module
   command: "{{flyway_install_dir}}/flyway
   -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
@@ -72,6 +60,7 @@
   -password={{DBPASSWORD}}
   -table=migration_schema_version
   -placeholderReplacement=false
+  -baselineOnMigrate=true
   -locations=filesystem:{{flyway_install_dir}}/sql/migration
   -X
   migrate"
