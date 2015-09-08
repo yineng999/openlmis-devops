@@ -1,0 +1,51 @@
+- name: Step 1 > Download db script
+  command: "wget -O {{application_dir}}/{{application_name}}/db/{{item}}.jar --auth-no-challenge
+  --http-user={{jenkins_user}}
+      --http-password=07785fd1ba8dfa7faafd41dbecf19750
+      http://{{jenkins_host}}/job/moz-build/{{BUILD_NO}}/artifact/open-lmis/modules/{{item}}/build/libs/{{item}}.jar"
+  with_items:
+      - db
+      - migration
+
+- name: Step 2 > Remove the dirctories of sql instance
+  command: rm -rf {{flyway_install_dir}}/sql/{{item}}
+  with_items:
+      - db
+      - migration
+
+- name: Step 3 > Initialize the dirctories of sql instance
+  file: path={{flyway_install_dir}}/sql/{{item}} mode=0755 state=directory
+  with_items:
+      - db
+      - migration
+
+- name: Step 4 > Unzip Sql file jar
+  command: "unzip {{application_dir}}/{{application_name}}/db/{{item}}.jar -d {{flyway_install_dir}}/sql/{{item}}"
+  with_items:
+      - db
+      - migration
+
+- name: Step 5 > migrate db module
+  command: "{{flyway_install_dir}}/flyway
+  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -schemas=public,atomfeed
+  -user={{dbuser}}
+  -password={{DBPASSWORD}}
+  -table=schema_version
+  -placeholderReplacement=false
+  -locations=filesystem:{{flyway_install_dir}}/sql/db
+  -X
+  migrate"
+
+- name: Step 6 > migrate migration module
+  command: "{{flyway_install_dir}}/flyway
+  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -schemas=public,atomfeed
+  -user={{dbuser}}
+  -password={{DBPASSWORD}}
+  -table=migration_schema_version
+  -placeholderReplacement=false
+  -baselineOnMigrate=true
+  -locations=filesystem:{{flyway_install_dir}}/sql/migration
+  -X
+  migrate"

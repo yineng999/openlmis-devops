@@ -1,0 +1,32 @@
+- name: Step 1 > Download WAR package
+  command: "wget -O {{application_dir}}/{{application_name}}/artifact/openlmis-web.war
+      --auth-no-challenge --http-user={{jenkins_user}}
+      --http-password=07785fd1ba8dfa7faafd41dbecf19750
+      http://{{jenkins_host}}/job/moz-build/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
+
+- name: Step 2 > Stop tomcat service
+  service: name=tomcat state=stopped
+
+- name: Step 3 > Move previous deployment artifact to artifact_last directory
+  command: "mv {{application_dir}}/{{application_name}}/webapps/ROOT.war
+  {{application_dir}}/{{application_name}}/artifact_last/"
+  ignore_errors: yes
+  sudo_user: middleware
+
+- name: Step 4 > Move previous deployment cache
+  command: "rm -rf {{application_dir}}/{{application_name}}/webapps/ROOT"
+  sudo_user: middleware
+
+- name: Step 5 > Copy current deployment artifact
+  command: "cp {{application_dir}}/{{application_name}}/artifact/openlmis-web.war {{application_dir}}/{{application_name}}/webapps/ROOT.war"
+  sudo_user: middleware
+
+- name: Step 6 > Restart tomcat service
+  service: name=tomcat state=restarted
+
+- name: Confirm application runs
+  register: application_ok
+  wait_for: port={{ http_port }}
+
+- include: rollback.yml
+  when: application_ok | failed

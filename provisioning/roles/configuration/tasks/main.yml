@@ -1,3 +1,0 @@
----
-- name: Copy region dependent files
-  copy: src=env/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644

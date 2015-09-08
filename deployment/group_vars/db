@@ -1,0 +1,8 @@
+---
+flyway_install_dir: /opt/flyway-commandline
+postgres_version: 9.4
+dbname: open_lmis
+dbuser: openlmis
+dbhost: localhost
+dbport: 5432
+

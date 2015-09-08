@@ -35,6 +35,8 @@
   file: path={{application_dir}}/{{application_name}}/{{ item }} owner=middleware group=middleware mode=0755 state=directory
   with_items:
        - properties
+       - artifact
+       - artifact_last
 
 - name: Step 9 > Initialize the dirctories of application 2
   tags: tomcat

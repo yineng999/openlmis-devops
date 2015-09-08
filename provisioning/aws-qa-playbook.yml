@@ -7,6 +7,3 @@
     - tomcat
     - postgres
     - flyway
-    - configuration
-  vars:
-    region: qa

@@ -1,0 +1,10 @@
+---
+- hosts: qa
+  connection: ssh
+  sudo: yes
+  roles:
+    - configuration
+    - flyway
+    - package
+  vars:
+    region: qa
