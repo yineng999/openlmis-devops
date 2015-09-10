@@ -1,1 +1,1 @@
-ansible-playbook provisioning/aws-ci-playbook.yml
+ansible-playbook deployment/deploy-to-ci-playbook.yml
