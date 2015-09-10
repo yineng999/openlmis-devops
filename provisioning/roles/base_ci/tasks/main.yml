@@ -19,6 +19,16 @@
         - apg
         - mercurial
         - git
+        - software-properties-common
+
+    - name: add apt-add-repository
+      sudo: yes
+      apt_repository: repo='ppa:ansible/ansible' state=present
+
+    - name: Install ansible
+      sudo: yes
+      apt: pkg=ansible
+
     - name: Install Java 1.7
       apt: pkg=openjdk-7-jdk state=present
 

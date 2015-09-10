@@ -1,1 +1,1 @@
-ansible-playbook provisioning/aws-qa-playbook.yml
+ansible-playbook provisioning/aws-ci-playbook.yml
