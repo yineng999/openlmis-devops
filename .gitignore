@@ -3,3 +3,4 @@ vagrant_ansible_inventory_default
 .gradle/
 *.box
 projects/
+provisioning/hosts
