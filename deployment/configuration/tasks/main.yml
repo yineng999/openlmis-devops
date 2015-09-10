@@ -1,8 +1,8 @@
 ---
-- name: QA env: Copy region dependent files
+- name: QA env Copy region dependent files
   copy: "src=env//{{region}}/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644"
   when: region == "qa"
 
-- name: CI env: Copy region dependent files
+- name: CI env Copy region dependent files
   copy: "src=env//{{region}}/ dest={{application_dir}}/{{application_name}}/properties"
   when: region == "ci"
