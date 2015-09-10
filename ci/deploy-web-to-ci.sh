@@ -1,1 +1,1 @@
-ansible-playbook deployment/deploy-to-ci-playbook.yml
+ansible-playbook -i provisioning/hosts deployment/deploy-to-ci-playbook.yml
