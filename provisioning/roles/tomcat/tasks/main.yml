@@ -22,7 +22,7 @@
 
 - name: Step 7 > Initialize the dirctories of tomcat instance
   tags: tomcat
-  file: path={{application_dir}}/server/{{ item }} owner=middleware group=middleware mode=0755 state=directory
+  file: path={{application_dir}}/server/{{ item }} owner=middleware group=middleware mode=0775 state=directory
   with_items:
          - temp
          - logs
@@ -32,7 +32,7 @@
 
 - name: Step 8 > Initialize the dirctories of application 1
   tags: tomcat
-  file: path={{application_dir}}/{{application_name}}/{{ item }} owner=middleware group=middleware mode=0755 state=directory
+  file: path={{application_dir}}/{{application_name}}/{{ item }} owner=middleware group=middleware mode=0775 state=directory
   with_items:
        - properties
        - artifact
