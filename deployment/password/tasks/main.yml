@@ -1,15 +1,15 @@
 ---
 - name: Replace mail server password in app properties
-  command: 'sed -i "5s/.*/mail.sender.password = $OPENLMIS_MAILPW" {{application_dir}}/{{application_name}}/properties/app.properties'
+  command: 'sed -i "5s/defaultPassword/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/app.properties'
 
 - name: Replace DB password in atomfeed properties
-  command: 'sed -i "14s/.*/jdbc.password=$PGPASSWORD" {{application_dir}}/{{application_name}}/properties/atomfeed.properties'
+  command: 'sed -i "14s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/atomfeed.properties'
 
 - name: Replace jdbc replication password in default properties
-  command: 'sed -i "51s/.*/openlmis.replication.jdbc.password=$PGPASSWORD" {{application_dir}}/{{application_name}}/properties/default.properties'
+  command: 'sed -i "51s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace jdbc password in default properties
-  command: 'sed -i "58s/.*/openlmis.jdbc.password=$PGPASSWORD" {{application_dir}}/{{application_name}}/properties/default.properties'
+  command: 'sed -i "58s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace mail password in mailing properties
-  command: 'sed -i "6s/.*/mail.sender.password = $OPENLMIS_MAILPW" {{application_dir}}/{{application_name}}/properties/mailing.properties'
+  command: 'sed -i "6s/defaultPassword/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/mailing.properties'
