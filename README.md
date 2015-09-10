@@ -1,6 +1,6 @@
 #Ansible Scripts for Open LMIS
 
-This provision project is build for https://github.com/OpenLMIS/open-lmis/tree/2.0 project.
+This provision project is build for https://github.com/OpenLMIS/open-lmis/tree/2.0-moz project.
 
 ##System requirements
 * JDK 7
@@ -12,10 +12,6 @@ This provision project is build for https://github.com/OpenLMIS/open-lmis/tree/2
 * Karma
 
 Instead of installing these requirements one by one. Ansible can help us do the annoying jobs for us. Here are some instructions.
-
-## Provision QA server
-run `ansible-playbook -i provisioning/hosts --private-key ~/.ssh/LMIS-CI.pem provisioning/aws-qa-playbook.yml`
-Make sure your local ssh config is set up to use the QA host and user.
 
 ## Using Ansible with vagrant
 We want to keep the develop environment all the same. Vagrant provisioned with Ansible is a good choice.
@@ -42,24 +38,24 @@ Read [SSHPASS install instruction] (https://gist.github.com/arunoda/7790979)
 
 ### Run your virtual machine
 
-Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install all packages you declared in `provisioning/playbook.yml` file.
-
-Note: If your Internet connection is slow, get the box LMIS-2.0.box from Danni and run `vagrant box add openlmis-box LMIS-2.0.box`.
+Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install all packages you declared in `provisioning/vagrant-playbook.yml` file.
 
 If your machine is already running, you want to provision again, just need to run `vagrant provision`. More vagrant commands read [here](http://docs.vagrantup.com/v2/cli/).
 
 To ssh into your box, run `vagrant ssh`.
 
-##Supports
+## Provision CI server
+run `ansible-playbook --extra-vars '{"DBPASSWORD":"[specify_a_db_password]", "MAILPASSWORD":"[specify_your_mail_server_password]"}' -i provisioning/hosts provisioning/aws-ci-playbook.yml`
 
-### Provision more dependencies
-If you want to add more dependencies to install.
+Make sure your local ssh config is set up to use the CI host and user.
 
-#### Install via ansible-playbooks
+## Provision QA server
+run `ansible-playbook --extra-vars '{"DBPASSWORD":"[specify_a_db_password]", "MAILPASSWORD":"[specify_your_mail_server_password]"}' -i provisioning/hosts provisioning/aws-qa-playbook.yml`
 
-Find the awesome [Ansible Playbooks](https://github.com/snowplow/ansible-playbooks). You can find most common tools/dependencies. Copy the specific role under `ansible-playbooks/roles` to `OpenLMS-TechOps/provisioning/roles/`. And add the role to your `provisioning/*-playbook.yml`.
+Make sure your local ssh config is set up to use the QA host and user.
 
-See example in this commit [Add karma to provision](https://github.com/gongmingqm10/OpenLMIS-TechOps/commit/d074174cd2285df6dc5ba64e27aaa033547f1211).
+## Deploy to QA
+run `ansible-playbook --extra-vars '{"BUILD_NO":"xx", "DBPASSWORD": "xxxx"}' -i provisioning/hosts deployment/deploy-to-qa-playbook.yml`
 
 #### Install via ansible-galaxy
 

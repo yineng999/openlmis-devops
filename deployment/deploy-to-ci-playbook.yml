@@ -1,0 +1,9 @@
+---
+- hosts: ci
+  connection: local
+  roles:
+    - configuration
+    - password
+    - package_ci
+  vars:
+    region: ci

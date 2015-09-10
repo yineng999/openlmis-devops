@@ -4,6 +4,7 @@
   sudo: yes
   roles:
     - configuration
+    - password
     - flyway
     - package
   vars:
