@@ -1,8 +1,9 @@
 - name: Step 1 > Download WAR package
   command: "wget -O {{application_dir}}/{{application_name}}/artifact/openlmis-web.war
-      --auth-no-challenge --http-user={{jenkins_user}}
-      --http-password=07785fd1ba8dfa7faafd41dbecf19750
-      http://{{jenkins_host}}/job/moz-build/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
+    --auth-no-challenge
+    --http-user={{jenkins_user}}
+    --http-password=b5c5990592a49e0df211b0e704d3bdd0
+    http://{{jenkins_host}}/job/moz-build/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
 
 - name: Step 2 > Stop tomcat service
   service: name=tomcat state=stopped
@@ -20,6 +21,9 @@
 - name: Step 5 > Copy current deployment artifact
   command: "cp {{application_dir}}/{{application_name}}/artifact/openlmis-web.war {{application_dir}}/{{application_name}}/webapps/ROOT.war"
   sudo_user: middleware
+
+- name: Update application version in app properties
+  command: "echo 'app.version={{BUILD_NO}}' >> {{application_dir}}/{{application_name}}/properties/app.properties"
 
 - name: Step 6 > Restart tomcat service
   service: name=tomcat state=restarted
