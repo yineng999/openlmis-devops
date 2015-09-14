@@ -18,25 +18,20 @@
   postgresql_user: db={{dbname}} name={{dbuser}} password={{DBPASSWORD}} priv=ALL
   sudo_user: postgres
 
-- name: Ensure schema privileges
-  postgresql_privs: >
-      db={{dbname}}
-      privs=ALL
-      type=schema
-      objs=public
-      role={{dbuser}}
-  sudo_user: postgres
-
 - name: Ensure user does not have unnecessary privilege
   postgresql_user: name={{dbuser}} role_attr_flags=SUPERUSER,NOCREATEDB
   sudo_user: postgres
 
-- name: Change public owner
+- name: Grant postgres privileges
   command: "psql -c 'GRANT postgres TO {{dbuser}}' -d {{dbname}}"
   sudo_user: postgres
 
-- name: Change public owner
-  command: "psql -c 'alter schema public owner to {{dbuser}}' -d {{dbname}}"
+- name: Delete schema public
+  command: "psql -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
+  sudo_user: postgres
+
+- name: Create schema public
+  command: "psql -c 'CREATE SCHEMA public AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
   sudo_user: postgres
 
 - name: Delete schema atomfeed

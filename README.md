@@ -55,7 +55,7 @@ run `ansible-playbook --extra-vars '{"DBPASSWORD":"[specify_a_db_password]", "MA
 Make sure your local ssh config is set up to use the QA host and user.
 
 ## Deploy to QA
-run `ansible-playbook --extra-vars '{"BUILD_NO":"xx"}' -i provisioning/hosts deployment/deploy-to-qa-playbook.yml`
+run `ansible-playbook --extra-vars '{"BUILD_NO":"xx", "DBPASSWORD":"[your_db_password]"}' -i provisioning/hosts deployment/deploy-to-qa-playbook.yml`
 
 #### Install via ansible-galaxy
 

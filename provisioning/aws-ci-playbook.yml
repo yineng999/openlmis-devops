@@ -13,3 +13,5 @@
     - ansible-role-jenkins
     - android
     - ansible-role-ruby
+  vars:
+    region: ci
