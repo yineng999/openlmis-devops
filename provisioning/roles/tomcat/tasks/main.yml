@@ -46,11 +46,20 @@
       - webapps
 
 
-- name: Step 10 > Configure Tomcat server
+- name: Step 10 > Configure Tomcat server - QA
   copy: src={{ item }} dest={{application_dir}}/server/conf owner=middleware group=middleware mode=0644
   with_items:
          - server.xml
          - web.xml
+
+- name: Step 10 > Configure Tomcat server - CI
+  copy: src={{ item }} dest={{application_dir}}/server/conf owner=middleware group=middleware mode=0644
+  with_items:
+         - server_ci.xml
+         - web.xml
+
+- name: rename Tomcat server xml CI
+  command: "mv {{application_dir}}/server/conf/server_ci.xml {{application_dir}}/server/conf/server.xml"
 
 - name: Step 11 > Copy the default application
   command: cp -R {{tomcat_install_dir}}/webapps/ROOT {{application_dir}}/{{application_name}}/webapps/
