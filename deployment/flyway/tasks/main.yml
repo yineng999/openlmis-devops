@@ -27,7 +27,7 @@
 
 - name: Step 5 > migrate db module
   command: "{{flyway_install_dir}}/flyway
-  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -url=jdbc:postgresql://{{dbhost_master}}:{{dbport}}/{{dbname}}
   -schemas=public,atomfeed
   -user={{dbuser}}
   -password={{DBPASSWORD}}
@@ -39,7 +39,7 @@
 
 - name: Step 6 > migrate migration module
   command: "{{flyway_install_dir}}/flyway
-  -url=jdbc:postgresql://{{dbhost}}:{{dbport}}/{{dbname}}
+  -url=jdbc:postgresql://{{dbhost_master}}:{{dbport}}/{{dbname}}
   -schemas=public,atomfeed
   -user={{dbuser}}
   -password={{DBPASSWORD}}

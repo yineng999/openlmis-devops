@@ -1,10 +1,10 @@
 ---
-- hosts: qa
+- hosts: proddb
   connection: ssh
   sudo: yes
   roles:
-    - password
+    - base
+    - postgres
     - flyway
-    - package
   vars:
-    region: qa
+    region: prod

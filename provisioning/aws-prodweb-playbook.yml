@@ -1,0 +1,9 @@
+---
+- hosts: prodweb
+  connection: ssh
+  sudo: yes
+  roles:
+    - base
+    - tomcat
+  vars:
+    region: prod

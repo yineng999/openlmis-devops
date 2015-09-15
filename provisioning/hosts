@@ -1,13 +1,31 @@
 [remote:children]
 qa
 ci
+local
+prodweb
 
 [servers:children]
 qa
 ci
+local
+prodweb
 
 [qa]
-xx.xx.xx.xx nickname=qa vm=1
+52.68.243.196 nickname=qa vm=1
 
 [ci]
 localhost nickname=ci vm=1
+
+[local]
+192.168.56.101 nickname=local vm=1
+
+
+[prodweb]
+54.65.251.183 nickname=webserver1 vm=1
+52.69.179.128 nickname=webserver2 vm=1
+
+
+[proddb]
+54.65.251.183 nickname=db1 vm=1
+52.69.179.128 nickname=db2 vm=1
+

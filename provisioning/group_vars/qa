@@ -1,19 +1,7 @@
 ---
-ansible_cache_dir: /var/cache/ansible # Need to update references to ansible cache to use this variable
-software_install_dir: /usr/local/share
-user_binaries: /usr/local/bin
-tomcat_install_dir: /opt/apache-tomcat-7.0.61
-application_dir: /app/tomcat
-application_name: openlmis
-
-http_port: 8000
-https_port: 8443
 jenkins_user: user_ansible
 jenkins_host: 52.69.16.156:8080
 
-flyway_install_dir: /opt/flyway-commandline
-postgres_version: 9.4
-dbname: open_lmis
-dbuser: openlmis
-dbhost: localhost
+
+dbhost_master: localhost
 dbport: 5432
