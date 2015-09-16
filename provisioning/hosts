@@ -26,6 +26,6 @@ localhost nickname=ci vm=1
 
 
 [proddb]
-52.74.122.228 nickname=db1 vm=1
-52.74.137.156 nickname=db2 vm=1
+54.65.251.183 nickname=db1 vm=1
+52.69.179.128 nickname=db2 vm=1
 
