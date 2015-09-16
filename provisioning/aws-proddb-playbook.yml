@@ -4,6 +4,6 @@
   sudo: yes
   roles:
     - base
-    - postgres-init
+    - postgres
   vars:
     region: prod

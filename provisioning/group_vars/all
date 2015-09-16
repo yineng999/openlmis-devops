@@ -4,6 +4,7 @@ software_install_dir: /usr/local/share
 flyway_install_dir: /opt/flyway-commandline
 tomcat_install_dir: /opt/apache-tomcat-7.0.61
 user_binaries: /usr/local/bin
+postgres_home: /etc/postgresql/9.4/main/
 
 application_dir: /app/tomcat
 application_name: openlmis
