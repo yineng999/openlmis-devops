@@ -4,7 +4,6 @@
   sudo: yes
   roles:
     - base
-    - postgres
-    - flyway
+    - postgres-init
   vars:
     region: prod

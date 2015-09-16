@@ -4,4 +4,5 @@ jenkins_host: 52.69.16.156:8080
 
 
 dbhost_master: localhost
+dbhost_slave: localhost
 dbport: 5432
