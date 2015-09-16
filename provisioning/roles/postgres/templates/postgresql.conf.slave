@@ -206,9 +206,9 @@ checkpoint_segments = 8		# in logfile segments, min 1, 16MB each
 
 # - Archiving -
 
-archive_mode = on		# allows archiving to be done
+#archive_mode = on		# allows archiving to be done
 				# (change requires restart)
-archive_command = '/bin/date'		# command to use to archive a logfile segment
+#archive_command = '/bin/date'		# command to use to archive a logfile segment
 				# placeholders: %p = path of file to archive
 				#               %f = file name only
 				# e.g. 'test ! -f /mnt/server/archivedir/%f && cp %p /mnt/server/archivedir/%f'

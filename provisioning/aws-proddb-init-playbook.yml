@@ -1,0 +1,8 @@
+---
+- hosts: proddb_master
+  connection: ssh
+  sudo: yes
+  roles:
+    - postgres-init
+  vars:
+    region: prod
