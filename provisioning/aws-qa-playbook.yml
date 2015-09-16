@@ -6,6 +6,7 @@
     - base
     - tomcat
     - postgres
+    - postgres-init
     - flyway
   vars:
     region: qa

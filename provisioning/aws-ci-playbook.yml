@@ -8,6 +8,7 @@
     - nodejs
     - gradle
     - postgres
+    - postgres-init
     - grunt
     - karma
     - ansible-role-jenkins
