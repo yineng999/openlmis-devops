@@ -17,3 +17,6 @@ install_postgres_server: true
 
 dbname: open_lmis
 dbuser: openlmis
+
+jenkins_user: user_ansible
+jenkins_host: 52.69.16.156:8080

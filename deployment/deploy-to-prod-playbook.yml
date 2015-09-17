@@ -1,8 +1,10 @@
 ---
-- hosts: qa
+- hosts: prodweb
   connection: ssh
   sudo: yes
   roles:
+    - configuration
     - flyway
+    - package
   vars:
-    region: local
+    region: prod
