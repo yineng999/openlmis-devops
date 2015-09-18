@@ -1,0 +1,24 @@
+1. Check the current app version: [prod_url]/release.json
+2. Find a latest successful moz-build on CI: http://52.69.16.156:8080/. Record the build number.
+3. Make sure the build version is tested on QA.
+4. If there is any new sql script or csv file upload for data set up (different from migration script), run the script or upload the csv on QA first. Check if the data are correct.
+5. Run all android functional tests and contract tests against this build and make sure everything passes.
+6. Tag the commit with a new version, for example: `git tag -a "moz-v1.1" -m "bug fixes, UI enhancements"`
+7. Push the git tags: `git push origin --tags`
+8. In openlmis-devops repo, make sure all the prod properties files have latest changes from openlmis. Change the app version in deployment/configuration/files/prod/app.properties, for example: app.version = "moz-v1.1"
+9. Push the change for prod properties.
+10. SSH into the deployment server, change user to deployuser. Navigate to the user home and find openlmis-devops directory.
+11. In openlmis-devops directory, pull latest code. Under deployment/configuration/files/prod/, check all passwords in properties files and make sure they are the correct prod passwords. If not, manually change them.
+12. In openlmis-devops directory, make sure the inventory file (provisioning/hosts) has correct private IP addresses for the prod web servers and prod DB servers.
+13. In openlmis-devops directory, run the ansible command for deploying to prod, using the build number you recorded on CI, and prod DB password. For example: `ansible-playbook --extra-vars '{"BUILD_NO":"[CI_build_number]", "DBPASSWORD":"[prod_db_password]"}' -i provisioning/hosts deployment/deploy-to-prod-playbook.yml`
+14. After ansible script finishes successfully, go to [prod_url]/release.json, and check if the version is updated.
+15. If there is any sql script for new data, run it from the deployment server, for example:
+`psql -U openlmis --file [sql_file] -w open_lmis -h [prod_db_host] -W` and type in prod db password.
+16. Go to prod url and log in. Make sure log in works okay.
+17. If there is csv that needs to be uploaded, log in as Admin and upload the csv.
+18. Check that the new data are set up correctly.
+19. From the android tablet, test the existing functionalities work ok:
+(1) Log in as test user.
+(2) Check facility data and products data are correct.
+(3) Do a VIA sync and a MMIA sync and make sure the sync works correctly.
+20. Now you may drink your wine :)
