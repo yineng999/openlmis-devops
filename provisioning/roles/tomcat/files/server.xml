@@ -73,7 +73,12 @@
     <Connector port="8000" protocol="HTTP/1.1"
                connectionTimeout="20000"
                URIEncoding="UTF-8"
-               redirectPort="8443" />
+               redirectPort="8443"
+               disableUploadTimeout="true"
+               compression="on"
+               noCompressionUserAgents="gozilla, traviata"
+               compressableMimeType="text/html, text/xml, application/javascript, text/css, text/plain"
+    />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -95,7 +100,12 @@
                maxThreads="150" scheme="https" secure="true"
                keystoreFile="conf/tomcat_server.keystore"
                keystorePass="qing_mei_zhu_ma"
-               clientAuth="false" sslProtocol="TLS" />
+               clientAuth="false" sslProtocol="TLS"
+               disableUploadTimeout="true"
+               compression="on"
+               noCompressionUserAgents="gozilla, traviata"
+               compressableMimeType="text/html, text/xml, application/javascript, text/css, text/plain"
+    />
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
