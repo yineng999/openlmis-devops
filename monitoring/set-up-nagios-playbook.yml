@@ -1,0 +1,7 @@
+---
+- hosts: deploy
+  connection: ssh
+  sudo: yes
+  roles:
+    - ansible-nagios
+    - ansible-nagios-config
