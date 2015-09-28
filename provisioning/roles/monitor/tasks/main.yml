@@ -1,0 +1,49 @@
+---
+# Create nagios users and groups.
+- name: create nagios group
+  sudo: true
+  group: >
+    gid=3000
+    name=nagios
+
+- name: create nagcmd group
+  sudo: true
+  group: >
+    gid=3001
+    name=nagcmd
+
+- name: create nagios user
+  sudo: true
+  user: >
+    uid=3000
+    group=nagios
+    groups=nagcmd
+    name=nagios
+    home=/usr/local/nagios
+    comment="Nagios Admin"
+
+# Update and install dependent packages.
+- name: Install nagios packages
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=86400
+  sudo: true
+  with_items:
+  - xinetd
+  - nagios3
+  - nagios-plugins
+  - nagios-nrpe-server
+  - nagios-nrpe-plugin
+
+
+- name: Add local ip to allowed_hosts on /etc/nagios/nrpe.cfg
+  lineinfile: dest=/etc/nagios/nrpe.cfg regexp='^allowed_hosts.*' line='allowed_hosts=127.0.0.1,{{ ansible_eth0.ipv4.address }},{{ hostvars[groups['monitor-server'][0]]['ansible_eth0']['ipv4']['address'] }}' state=present
+  
+
+- name: Change file executable
+  file: path=/usr/lib/nagios/plugins owner=nagios group=nagios mode=0644 state=directory
+
+- name: Comment default hardcoded commands present inside nrpe.cfg
+  replace: dest=/etc/nagios/nrpe.cfg regexp='^command\[' replace='# \g<0>'
+
+
+- name: restart nagios nrpe
+  service: name=nagios-nrpe-server state=restarted
