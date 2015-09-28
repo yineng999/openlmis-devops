@@ -1,0 +1,8 @@
+---
+- hosts: monitor-server
+  connection: ssh
+  sudo: yes
+  roles:
+    - monitor
+  vars:
+    region: monitor-server
