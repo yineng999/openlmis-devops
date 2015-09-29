@@ -28,22 +28,15 @@
   sudo: true
   with_items:
   - xinetd
-  - nagios3
   - nagios-plugins
   - nagios-nrpe-server
   - nagios-nrpe-plugin
 
-
-- name: Add local ip to allowed_hosts on /etc/nagios/nrpe.cfg
-  lineinfile: dest=/etc/nagios/nrpe.cfg regexp='^allowed_hosts.*' line='allowed_hosts=127.0.0.1,{{ ansible_eth0.ipv4.address }},{{ hostvars[groups['monitor-server'][0]]['ansible_eth0']['ipv4']['address'] }}' state=present
-  
-
 - name: Change file executable
-  file: path=/usr/lib/nagios/plugins owner=nagios group=nagios mode=0644 state=directory
+  file: path=/usr/lib/nagios/plugins owner=nagios group=nagios mode=0755 state=directory
 
 - name: Comment default hardcoded commands present inside nrpe.cfg
-  replace: dest=/etc/nagios/nrpe.cfg regexp='^command\[' replace='# \g<0>'
-
+  template: src=nrpe.cfg.properties dest=/etc/nagios/nrpe.cfg owner=nagios group=nagios mode=0755
 
 - name: restart nagios nrpe
   service: name=nagios-nrpe-server state=restarted
