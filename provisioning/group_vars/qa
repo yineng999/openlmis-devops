@@ -3,6 +3,6 @@ jenkins_user: user_ansible
 jenkins_host: 52.69.16.156:8080
 
 
-dbhost_master: localhost
-dbhost_slave: localhost
+dbhost_master: 52.68.243.196
+dbhost_slave: 52.68.243.196
 dbport: 5432
