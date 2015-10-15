@@ -3,7 +3,6 @@
   connection: ssh
   sudo: yes
   roles:
-    - configuration
     - flyway
     - package
   vars:
