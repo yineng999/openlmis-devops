@@ -4,3 +4,5 @@ vagrant_ansible_inventory_default
 *.box
 projects/
 provisioning/hosts
+*.properties
+hosts
