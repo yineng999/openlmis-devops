@@ -1,0 +1,9 @@
+---
+- hosts: demo
+  connection: ssh
+  sudo: yes
+  roles:
+    - flyway
+    - package
+  vars:
+    region: demo
