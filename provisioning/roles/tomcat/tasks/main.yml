@@ -67,6 +67,7 @@
 - name: Step 11 > Copy the default application
   command: cp -R {{tomcat_install_dir}}/webapps/ROOT {{application_dir}}/{{application_name}}/webapps/
   sudo_user: middleware
+  ignore_errors: yes
 
 - name: Step 12 > Setup the env variables
   template: src=setenv.sh dest={{tomcat_install_dir}}/bin/setenv.sh owner=middleware group=middleware mode=0755
