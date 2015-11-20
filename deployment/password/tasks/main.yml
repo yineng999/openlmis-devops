@@ -1,7 +1,4 @@
 ---
-- name: Replace mail server password in app properties
-  command: 'sed -i "5s/defaultPassword/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/app.properties'
-
 - name: Replace DB password in atomfeed properties
   command: 'sed -i "14s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/atomfeed.properties'
 
@@ -12,4 +9,4 @@
   command: 'sed -i "58s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace mail password in mailing properties
-  command: 'sed -i "6s/defaultPassword/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/mailing.properties'
+  command: 'sed -i "6s/defaultPwd/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/mailing.properties'
