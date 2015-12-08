@@ -6,3 +6,7 @@
     - name: Install virtualenv
       sudo: yes
       apt: pkg=python-virtualenv state=present
+
+    - name: Install ruby(so cubes can generate its ini file)
+      sudo: yes
+      apt: pkg=ruby state=present
