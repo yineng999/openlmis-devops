@@ -1,0 +1,4 @@
+---
+    - name: Install pip
+      sudo: yes
+      apt: pkg=python-pip state=present
