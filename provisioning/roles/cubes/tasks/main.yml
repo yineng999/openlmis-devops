@@ -2,3 +2,7 @@
     - name: Install pip
       sudo: yes
       apt: pkg=python-pip state=present
+
+    - name: Install virtualenv
+      sudo: yes
+      apt: pkg=python-virtualenv state=present
