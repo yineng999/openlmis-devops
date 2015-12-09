@@ -28,7 +28,7 @@ start() {
     #ulimit -n 100000
     #umask 007
     #/bin/su -p -s /bin/sh middleware
-        if [ `user_exists $CUBES_HOME` = "1" ]
+        if [ `user_exists $CUBES_USER` = "1" ]
         then
                 su $CUBES_USER -c $CUBES_HOME/bin/start.sh
         else
