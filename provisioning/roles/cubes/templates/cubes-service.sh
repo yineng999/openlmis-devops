@@ -52,21 +52,7 @@ stop() {
   then
     echo -e "\e[00;31mStoping cubes\e[00m"
     #/bin/su -p -s /bin/sh cubes
-        sh $CUBES_HOME/bin/stop.sh
-
-    let kwait=$SHUTDOWN_WAIT
-    count=0;
-    until [ `ps -p $pid | grep -c $pid` = '0' ] || [ $count -gt $kwait ]
-    do
-      echo -n -e "\n\e[00;31mWaiting for processes to exit\e[00m";
-      sleep 1
-      let count=$count+1;
-    done
-
-    if [ $count -gt $kwait ]; then
-      echo -n -e "\n\e[00;31mKilling processes which didn't stop after $SHUTDOWN_WAIT seconds\e[00m"
-      kill -9 $pid
-    fi
+    su $CUBES_USER -c $CUBES_HOME/bin/stop.sh
   else
     echo -e "\e[00;31mCubes is not running\e[00m"
   fi

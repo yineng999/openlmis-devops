@@ -9,7 +9,6 @@
         - python-virtualenv
         - libpq-dev
         - postgresql-client
-        - python-psycopg2
 
     - name: Step 2 > Initialize the dirctories of cubes instance
       file: path={{cubes_home}} owner=middleware group=middleware mode=0775 state=directory
