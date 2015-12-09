@@ -6,6 +6,7 @@ tomcat_install_dir: /opt/apache-tomcat-7.0.61
 user_binaries: /usr/local/bin
 postgres_home: /etc/postgresql/9.4/main/
 
+cubes_home: /app/cubes
 application_dir: /app/tomcat
 application_name: openlmis
 

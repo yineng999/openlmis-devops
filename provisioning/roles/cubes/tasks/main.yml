@@ -1,12 +1,15 @@
 ---
-    - name: Install pip
+    #dependent on python and ruby, the role  tomcat and ansible-role-ruby
+    - name: Step 1 >Install pip and virtualenv
       sudo: yes
-      apt: pkg=python-pip state=present
+      apt: pkg={{ item }} state=present
+      tags: [packages]
+      with_items:
+        - python-pip
+        - python-virtualenv
 
-    - name: Install virtualenv
-      sudo: yes
-      apt: pkg=python-virtualenv state=present
+    - name: Step 2 > Initialize the dirctories of cubes instance
+      file: path={{cubes_home}} owner=middleware group=middleware mode=0775 state=directory
 
-    - name: Install ruby(so cubes can generate its ini file)
-      sudo: yes
-      apt: pkg=ruby state=present
+    - name: Step 3 > Setup the service
+      template: src=cubes-service.sh dest=/etc/init.d/cubes mode=0755

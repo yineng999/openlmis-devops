@@ -5,3 +5,14 @@ vagrant_ansible_inventory_default
 projects/
 provisioning/hosts
 hosts
+.idea/
+*.iml
+*.ipr
+*.iws
+*.ids
+build/
+out/
+classes
+.gradle
+*.DS_Store
+*.class
