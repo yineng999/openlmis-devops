@@ -1,7 +1,0 @@
----
-- hosts: ci
-  connection: local
-  roles:
-    - cubes-ci
-  vars:
-    region: ci
