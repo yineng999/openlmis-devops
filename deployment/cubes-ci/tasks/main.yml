@@ -1,7 +1,7 @@
 ---
 
 - name: Step 1 > Copy cubes artifact
-  command: "cp /var/lib/jenkins/jobs/Lmis-cubes/lastSuccessfulBuild/artifact/cubes.zip {{cubes_home}}/cubes.zip"
+  command: "cp /var/lib/jenkins/job/Lmis-cubes/lastSuccessfulBuild/artifact/cubes.zip {{cubes_home}}/cubes.zip"
 
 - name: Step 2 > Stop cubes
   command: "{{cubes_home}}/bin/stop.sh"
