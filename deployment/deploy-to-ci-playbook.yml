@@ -9,6 +9,7 @@
     # deploying to ci is different from deploying to other servers
     # package_ci and cubes_ci copies artifacts locally instead of
     # fetching them via http
-    # this is because the jenkins user has very limmited rights
+    # this is because the jenkins user has very limmited rights:
+    # it can not start services, can not write to certain files ... ...
   vars:
     region: ci
