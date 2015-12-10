@@ -1,7 +1,6 @@
 ---
 
   - name: Step 1 > Download cubes package
-    sudo_user: middleware
     command: "wget -O {{cubes_home}}/cubes.zip
       --auth-no-challenge
       --http-user={{jenkins_user}}
