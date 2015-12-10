@@ -2,6 +2,6 @@
 - hosts: ci
   connection: local
   roles:
-    - cubes
+    - cubes-ci
   vars:
     region: ci
