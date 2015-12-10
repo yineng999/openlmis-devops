@@ -11,3 +11,6 @@
 
 - name: Step 4 > Restart cubes
   command: "{{cubes_home}}/bin/start.sh > start.log"
+  register: out
+
+- debug: var=out.stdout_lines
