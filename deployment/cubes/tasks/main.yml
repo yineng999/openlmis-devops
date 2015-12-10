@@ -1,6 +1,7 @@
 ---
 
   - name: Step 1 > Download cubes package
+    sudo_user: middleware
     command: "wget -O {{cubes_home}}/cubes.zip
       --auth-no-challenge
       --http-user={{jenkins_user}}
@@ -11,6 +12,7 @@
     service: name=cubes state=stopped
 
   - name: Step 3 > Un package
+    sudo_user: middleware
     command: "unzip -o {{cubes_home}}/cubes.zip -d {{cubes_home}}/ "
 
   - name: Step 4 > Restart cubes service
