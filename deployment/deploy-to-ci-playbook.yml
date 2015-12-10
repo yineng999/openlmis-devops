@@ -5,6 +5,5 @@
     - configuration
     - password
     - package_ci
-    - cubes
   vars:
     region: ci
