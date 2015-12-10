@@ -10,4 +10,4 @@
   command: "{{cubes_home}}/bin/stop.sh"
 
 - name: Step 4 > Restart cubes
-  command: "{{cubes_home}}/bin/start.sh"
+  command: "{{cubes_home}}/bin/start.sh > start.log"
