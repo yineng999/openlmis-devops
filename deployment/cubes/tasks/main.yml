@@ -11,7 +11,6 @@
     service: name=cubes state=stopped
 
   - name: Step 3 > Un package
-    sudo_user: middleware
     command: "unzip -o {{cubes_home}}/cubes.zip -d {{cubes_home}}/ "
 
   - name: Step 4 > Restart cubes service
