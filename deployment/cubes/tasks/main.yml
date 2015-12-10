@@ -1,0 +1,19 @@
+---
+
+  - name: Step 1 > Download cubes package
+    sudo_user: middleware
+    command: "wget -O {{cubes_home}}/cubes.zip
+      --auth-no-challenge
+      --http-user={{jenkins_user}}
+      --http-password=b5c5990592a49e0df211b0e704d3bdd0
+      http://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/cubes.zip"
+
+  - name: Step 2 > Stop cubes service
+    service: name=cubes state=stopped
+
+  - name: Step 3 > Un package
+    sudo_user: middleware
+    command: "unzip -o {{cubes_home}}/cubes.zip -d {{cubes_home}}/ "
+
+  - name: Step 4 > Restart cubes service
+    service: name=cubes state=restarted
