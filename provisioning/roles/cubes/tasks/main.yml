@@ -1,5 +1,5 @@
 ---
-    #dependent on python and ruby, the role  tomcat and ansible-role-ruby
+    #dependent on python and ruby, the role  tomcat and ruby
     - name: Step 1 >Install pip and virtualenv
       sudo: yes
       apt: pkg={{ item }} state=present
