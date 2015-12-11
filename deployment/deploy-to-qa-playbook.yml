@@ -6,5 +6,6 @@
     - configuration
     - flyway
     - package
+    - cubes
   vars:
     region: qa

@@ -13,8 +13,8 @@ export CUBES_USER=middleware
 
 
 cubes_pid() {
-        echo `ps -ef | grep 'slicer serve' | grep -v grep | tr -s " "|cut -d" " -f3`
-        #ps aux|grep 'slicer serve'|grep -v grep|awk  '{print $2}'|xargs kill -9
+        #echo `ps -ef | grep 'slicer serve' | grep -v grep | tr -s " "|cut -d" " -f3`
+        echo `ps aux|grep 'slicer serve'|grep -v grep|awk  '{print $2}'`
 }
 
 start() {
