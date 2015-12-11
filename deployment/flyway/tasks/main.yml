@@ -2,7 +2,8 @@
   command: "wget -O {{application_dir}}/{{application_name}}/db/{{item}}.jar --auth-no-challenge
       --http-user={{jenkins_user}}
       --http-password=b5c5990592a49e0df211b0e704d3bdd0
-      http://{{jenkins_host}}/job/moz-build/{{BUILD_NO}}/artifact/open-lmis/modules/{{item}}/build/libs/{{item}}.jar"
+      http://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/{{item}}/build/libs/{{item}}.jar"
+
   with_items:
       - db
       - migration

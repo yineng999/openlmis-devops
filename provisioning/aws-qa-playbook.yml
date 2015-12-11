@@ -8,5 +8,6 @@
     - postgres
     - postgres-init
     - flyway
+    - cubes
   vars:
     region: qa

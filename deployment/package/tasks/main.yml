@@ -3,7 +3,7 @@
     --auth-no-challenge
     --http-user={{jenkins_user}}
     --http-password=b5c5990592a49e0df211b0e704d3bdd0
-    http://{{jenkins_host}}/job/moz-build/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
+    http://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
 
 - name: Step 2 > Stop tomcat service
   service: name=tomcat state=stopped
