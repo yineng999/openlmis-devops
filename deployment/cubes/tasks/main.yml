@@ -4,9 +4,10 @@
     sudo_user: middleware
     command: "wget -O {{cubes_home}}/cubes.zip
       --auth-no-challenge
+      --no-check-certificate
       --http-user={{jenkins_user}}
       --http-password=b5c5990592a49e0df211b0e704d3bdd0
-      http://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/cubes.zip"
+      https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/cubes.zip"
 
   - name: Step 2 > Stop cubes service
     service: name=cubes state=stopped
