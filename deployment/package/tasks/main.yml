@@ -32,6 +32,3 @@
 - name: Confirm application runs
   register: application_ok
   wait_for: port={{ http_port }}
-
-- include: rollback.yml
-  when: application_ok | failed
