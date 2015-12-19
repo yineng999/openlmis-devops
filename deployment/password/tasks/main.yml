@@ -1,18 +1,12 @@
-- name: Replace all pg password in secrets properties file
-  command: 'sed -i "s|postgresPwd|$PGPASSWORD|g" {{application_dir}}/{{application_name}}/properties/secrets.properties'
+---
+- name: Replace DB password in atomfeed properties
+  command: 'sed -i "14s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/atomfeed.properties'
 
-- name: Replace all pg username in secrets properties file
-  command: 'sed -i "s|postgresUname|$POSTGRES_USER_NAME|g" {{application_dir}}/{{application_name}}/properties/secrets.properties'
+- name: Replace jdbc replication password in default properties
+  command: 'sed -i "51s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
-- name: Replace all pg host in secrets properties file
-  command: 'sed -i "s|postgresHost|$POSTGRES_HOST|g" {{application_dir}}/{{application_name}}/properties/secrets.properties'
+- name: Replace jdbc password in default properties
+  command: 'sed -i "58s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
-- name: Replace mail url in secrets properties file
-  command: 'sed -i "s|mailBaseUrl:mailPort|$MAILURL|g" {{application_dir}}/{{application_name}}/properties/secrets.properties'
-
-- name: Replace mail pwd in secrets properties file
-  command: 'sed -i "s|mailPwd|$OPENLMIS_MAILPW|g" {{application_dir}}/{{application_name}}/properties/secrets.properties'
-
-- name: Replace app url in secrets properties file
-  command: 'sed -i "s|appUrl:appPort|$APPURL|g" {{application_dir}}/{{application_name}}/properties/secrets.properties'
-
+- name: Replace mail password in mailing properties
+  command: 'sed -i "6s/defaultPwd/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/mailing.properties'
