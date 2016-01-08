@@ -9,5 +9,6 @@
     - postgres-init
     - flyway
     - cubes
+    - phantom
   vars:
     region: qa

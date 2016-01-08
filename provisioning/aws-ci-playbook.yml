@@ -15,5 +15,6 @@
     - android
     - ansible-role-ruby
     - cubes
+    - phantom
   vars:
     region: ci
