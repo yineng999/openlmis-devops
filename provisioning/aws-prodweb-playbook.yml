@@ -7,5 +7,6 @@
     - tomcat
     - flyway
     - cubes
+    - phantom
   vars:
     region: prod
