@@ -1,0 +1,12 @@
+---
+- hosts: prodsim
+  connection: ssh
+  sudo: yes
+  roles:
+    - password
+    - configuration
+    - flyway
+    - package
+    - cubes
+  vars:
+    region: prod
