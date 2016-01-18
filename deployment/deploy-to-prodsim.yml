@@ -3,8 +3,8 @@
   connection: ssh
   sudo: yes
   roles:
-    - password
     - configuration
+    - password
     - flyway
     - package
     - cubes
