@@ -9,4 +9,4 @@
     - package
     - cubes
   vars:
-    region: prod
+    region: prodsim
