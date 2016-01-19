@@ -3,6 +3,7 @@
   connection: ssh
   sudo: yes
   roles:
+    - syncdata
     - configuration
     - password
     - flyway
