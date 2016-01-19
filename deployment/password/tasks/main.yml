@@ -1,12 +1,12 @@
 ---
 - name: Replace DB password in atomfeed properties
-  command: 'sed -i "14s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/atomfeed.properties'
+  command: 'sed -i "14s/postgresPwd/{{DBPASSWORD}}/" {{application_dir}}/{{application_name}}/properties/atomfeed.properties'
 
 - name: Replace jdbc replication password in default properties
-  command: 'sed -i "51s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
+  command: 'sed -i "51s/postgresPwd/{{DBPASSWORD}}/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace jdbc password in default properties
-  command: 'sed -i "58s/postgresPwd/$PGPASSWORD/" {{application_dir}}/{{application_name}}/properties/default.properties'
+  command: 'sed -i "58s/postgresPwd/{{DBPASSWORD}}/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace mail password in mailing properties
   command: 'sed -i "6s/defaultPwd/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/mailing.properties'
