@@ -2,6 +2,9 @@
 - name: Stop all postgres process
   command: "pkill postgres"
 
+- name: Start postgres server
+  command: "service postgresql start"
+
 - name: Drop current DB
   command: "dropdb {{dbname}}"
   sudo_user: postgres
