@@ -1,6 +1,6 @@
 ---
 - name: Stop app
-  command: "sudo service tomcat stop"
+  command: "service tomcat stop"
 
 - name: Stop all postgres process
   command: "pkill postgres"
