@@ -6,7 +6,7 @@
   command: 'sed -i "51s/postgresPwd/{{DBPASSWORD}}/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace jdbc password in default properties
-  command: 'sed -i "58s/postgresPwd/{{DBPASSWORD}}/" {{application_dir}}/{{application_name}}/properties/default.properties'
+  command: 'sed -i "44s/postgresPwd/{{DBPASSWORD}}/" {{application_dir}}/{{application_name}}/properties/default.properties'
 
 - name: Replace mail password in mailing properties
   command: 'sed -i "6s/defaultPwd/$OPENLMIS_MAILPW/" {{application_dir}}/{{application_name}}/properties/mailing.properties'
