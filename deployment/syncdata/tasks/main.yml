@@ -9,11 +9,11 @@
   command: "service postgresql start"
 
 - name: Drop current DB
-  command: "dropdb {{dbname}}"
+  command: "dropdb {{dbname}} -U {{dbuser}}"
   sudo_user: postgres
 
 - name: Create DB
-  command: "createdb {{dbname}}"
+  command: "createdb {{dbname}} -U {{dbuser}}"
   sudo_user: postgres
 
 - name: Load anonymized prod data
