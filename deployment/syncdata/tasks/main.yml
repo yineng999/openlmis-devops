@@ -1,4 +1,7 @@
 ---
+- name: Stop app
+  command: "sudo service tomcat stop"
+
 - name: Stop all postgres process
   command: "pkill postgres"
 
@@ -16,3 +19,6 @@
 - name: Load anonymized prod data
   command: "psql {{dbname}} -U {{dbuser}} --file {{prod_data_file_location}}"
   sudo_user: postgres
+
+- name: Start app
+  command: "sudo service tomcat start"
