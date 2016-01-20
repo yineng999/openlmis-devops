@@ -20,5 +20,8 @@
   command: "psql {{dbname}} -U {{dbuser}} --file {{prod_data_file_location}}"
   sudo_user: postgres
 
+- name: Change passwords
+  command: "psql {{dbname}} -U {{dbuser}} --file change_passwords.sql"
+
 - name: Start app
   command: "sudo service tomcat start"
