@@ -9,7 +9,7 @@ def replace_email(file_path):
     with open(abs_path,'w') as new_file:
         with open(file_path) as old_file:
             for line in old_file:
-                new_file.write(re.sub("^(.*? |)[^@]+@[^ ]+", "x%s@xxx.com" % random.randint(0, 10000), line))
+                new_file.write(re.sub("\W[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", " x%s@xxx.com" % random.randint(0, 10000), line))
     close(fh)
     remove(file_path)
     move(abs_path, file_path)
