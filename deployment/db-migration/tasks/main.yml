@@ -1,0 +1,15 @@
+---
+- name: Stop app
+  command: "service tomcat stop"
+
+- name: Stop all postgres process
+  command: "pkill postgres"
+
+- name: Start postgres server
+  command: "service postgresql start"
+
+- name: Insert unpack kit reason
+  command: "python migration/insert_unpack_kit_reason.py"
+
+- name: Start app
+  command: "sudo service tomcat start"

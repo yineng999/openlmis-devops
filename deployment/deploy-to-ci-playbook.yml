@@ -6,6 +6,7 @@
     - password
     - package_ci
     - cubes-ci
+    - db-migration
     # deploying to ci is different from deploying to other servers
     # package_ci and cubes_ci copies artifacts locally instead of
     # fetching them via http
