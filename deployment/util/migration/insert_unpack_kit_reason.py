@@ -4,7 +4,7 @@ import sys
 import pprint
 
 def main():
-    conn_string = "host='localhost' dbname='open_lmis' user='openlmis' password=''"
+    conn_string = "host='localhost' dbname='open_lmis' user='postgres' password=''"
 
     print "Connecting to database\n ->%s" % (conn_string)
 
