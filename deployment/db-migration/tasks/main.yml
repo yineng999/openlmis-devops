@@ -5,7 +5,7 @@
   file: path={{flyway_install_dir}}/sql/one-time-migration mode=0755 state=directory
 
 - name: Step 3 > move Sql file
-  copy: src=migation/ dest={{flyway_install_dir}}/sql/one-time-migration
+  copy: src=db-migration/migration/ dest={{flyway_install_dir}}/sql/one-time-migration
 
 - name: Step 4 > migrate db module
   command: "{{flyway_install_dir}}/flyway

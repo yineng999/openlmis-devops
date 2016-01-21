@@ -1,0 +1,1 @@
+INSERT INTO losses_adjustments_types (name, description, additive) VALUES ('UNPACK_KIT', 'Unpack kit', FALSE);
