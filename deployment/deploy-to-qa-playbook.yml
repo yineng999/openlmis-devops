@@ -7,6 +7,6 @@
     - flyway
     - package
     - cubes
-    - one-time-migration
+    - db-migration
   vars:
     region: qa
