@@ -3,10 +3,12 @@
   connection: ssh
   sudo: yes
   roles:
+    - syncdata
     - configuration
     - password
     - flyway
     - package
     - cubes
+    - db-migration
   vars:
     region: upgrade_test
