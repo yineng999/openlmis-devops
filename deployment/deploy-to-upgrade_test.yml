@@ -1,0 +1,12 @@
+---
+- hosts: upgrade_test
+  connection: ssh
+  sudo: yes
+  roles:
+    - configuration
+    - password
+    - flyway
+    - package
+    - cubes
+  vars:
+    region: upgrade_test
