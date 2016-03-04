@@ -1,0 +1,27 @@
+---
+- name: Stop app
+  command: "service tomcat stop"
+
+- name: Stop all postgres process
+  command: "pkill postgres"
+
+- name: Reset system date
+  command: "date -s '20160222 00:00'"
+
+- name: Start postgres server
+  command: "service postgresql start"
+
+- name: Drop current DB
+  command: "dropdb {{dbname}} -U {{dbuser}}"
+  sudo_user: postgres
+
+- name: Create DB
+  command: "createdb {{dbname}} -U {{dbuser}}"
+  sudo_user: postgres
+
+- name: Load data
+command: "psql {{dbname}} -U {{dbuser}} --file {{data_file_location}}"
+  sudo_user: postgres
+
+- name: Start app
+  command: "service tomcat start"

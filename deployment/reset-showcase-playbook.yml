@@ -1,0 +1,8 @@
+---
+- hosts: showcase
+  connection: ssh
+  sudo: yes
+  roles:
+    - reset-data
+  vars:
+    region: showcase

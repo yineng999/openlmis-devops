@@ -1,0 +1,13 @@
+---
+- hosts: showcase
+  connection: ssh
+  sudo: yes
+  roles:
+    - configuration
+    - password
+    - flyway
+    - package
+    - cubes
+    - db-migration
+  vars:
+    region: showcase
