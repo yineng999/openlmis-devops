@@ -20,7 +20,7 @@
   sudo_user: postgres
 
 - name: Load data
-command: "psql {{dbname}} -U {{dbuser}} --file {{data_file_location}}"
+  command: "psql {{dbname}} -U {{dbuser}} --file {{data_file_location}}"
   sudo_user: postgres
 
 - name: Start app
