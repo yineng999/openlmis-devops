@@ -1,0 +1,6 @@
+#!/bin/bash
+
+a='20160222 '
+b=`date '+%X'`
+c=`echo $a$b`
+date -s "$c"

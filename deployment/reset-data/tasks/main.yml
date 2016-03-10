@@ -6,7 +6,7 @@
   command: "pkill postgres"
 
 - name: Reset system date
-  command: "date -s '20160222 00:00'"
+  command: "/home/ubuntu/set_date"
 
 - name: Start postgres server
   command: "service postgresql start"
