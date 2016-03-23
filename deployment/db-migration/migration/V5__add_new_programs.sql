@@ -8,7 +8,6 @@ INSERT INTO programs (code, name, description, active, templateConfigured,
 ('NUTRITION', 'Nutrition', 'Nutrition', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
 ('VIA', 'VIA', 'VIA', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE);
 
-# did not add PTV to VIA programs yet
 UPDATE programs SET parentId = (SELECT id FROM programs WHERE code = 'VIA')
 WHERE code in ('ESS_MEDS', 'NUTRITION', 'TEST_KIT', 'TB', 'MALARIA', 'PME');
 
