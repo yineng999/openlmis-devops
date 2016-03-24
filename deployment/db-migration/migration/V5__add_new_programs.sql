@@ -283,7 +283,7 @@ INSERT INTO role_assignments
 ((SELECT ID FROM USERS WHERE username = 'Michafutene'),
   (SELECT id FROM roles WHERE name = 'FacilityHead'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'FacilityHead'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
+  (SELECT id FROM roles WHERE name = 'FacilityHead'), (SELECT id FROM programs WHERE code = 'VIA'), NULL);
 
 UPDATE role_assignments
   SET programId = (SELECT id FROM programs WHERE code = 'VIA')
