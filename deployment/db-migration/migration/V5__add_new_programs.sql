@@ -1,12 +1,58 @@
 INSERT INTO programs (code, name, description, active, templateConfigured,
-  regimenTemplateConfigured, budgetingApplies, usesDar, push) VALUES
-('TEST_KIT', 'Testes Rápidos Diag', 'Testes Rápidos Diag', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
-('TB', 'Tuberculose', 'Tuberculose', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
-('MALARIA', 'Malaria', 'Malaria', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
-('PTV', 'PTV', 'PTV', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
-('PME', 'PME', 'PME', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
-('NUTRITION', 'Nutrition', 'Nutrition', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
-('VIA', 'VIA', 'VIA', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE);
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'TEST_KIT', 'Testes Rápidos Diag', 'Testes Rápidos Diag', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'TEST_KIT'
+  );
+
+INSERT INTO programs (code, name, description, active, templateConfigured,
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'TB', 'Tuberculose', 'Tuberculose', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'TEST_KIT'
+  );
+
+INSERT INTO programs (code, name, description, active, templateConfigured,
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'MALARIA', 'Malaria', 'Malaria', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'TEST_KIT'
+  );
+
+INSERT INTO programs (code, name, description, active, templateConfigured,
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'PTV', 'PTV', 'PTV', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'TEST_KIT'
+  );
+
+INSERT INTO programs (code, name, description, active, templateConfigured,
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'PME', 'PME', 'PME', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'TEST_KIT'
+  );
+
+INSERT INTO programs (code, name, description, active, templateConfigured,
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'NUTRITION', 'NUTRITION', 'NUTRITION', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'TEST_KIT'
+  );
+
+INSERT INTO programs (code, name, description, active, templateConfigured,
+  regimenTemplateConfigured, budgetingApplies, usesDar, push)
+SELECT 'VIA', 'VIA', 'VIA', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+WHERE
+  NOT EXISTS (
+    SELECT * FROM programs WHERE code = 'VIA'
+  );
 
 UPDATE programs SET parentId = (SELECT id FROM programs WHERE code = 'VIA')
 WHERE code in ('ESS_MEDS', 'NUTRITION', 'TEST_KIT', 'TB', 'MALARIA', 'PME');
