@@ -11,7 +11,7 @@ INSERT INTO programs (code, name, description, active, templateConfigured,
 SELECT 'TB', 'Tuberculose', 'Tuberculose', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 WHERE
   NOT EXISTS (
-    SELECT * FROM programs WHERE code = 'TEST_KIT'
+    SELECT * FROM programs WHERE code = 'TB'
   );
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
@@ -19,7 +19,7 @@ INSERT INTO programs (code, name, description, active, templateConfigured,
 SELECT 'MALARIA', 'Malaria', 'Malaria', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 WHERE
   NOT EXISTS (
-    SELECT * FROM programs WHERE code = 'TEST_KIT'
+    SELECT * FROM programs WHERE code = 'MALARIA'
   );
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
@@ -27,7 +27,7 @@ INSERT INTO programs (code, name, description, active, templateConfigured,
 SELECT 'PTV', 'PTV', 'PTV', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 WHERE
   NOT EXISTS (
-    SELECT * FROM programs WHERE code = 'TEST_KIT'
+    SELECT * FROM programs WHERE code = 'PTV'
   );
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
@@ -35,7 +35,7 @@ INSERT INTO programs (code, name, description, active, templateConfigured,
 SELECT 'PME', 'PME', 'PME', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 WHERE
   NOT EXISTS (
-    SELECT * FROM programs WHERE code = 'TEST_KIT'
+    SELECT * FROM programs WHERE code = 'PME'
   );
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
@@ -43,7 +43,7 @@ INSERT INTO programs (code, name, description, active, templateConfigured,
 SELECT 'NUTRITION', 'NUTRITION', 'NUTRITION', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 WHERE
   NOT EXISTS (
-    SELECT * FROM programs WHERE code = 'TEST_KIT'
+    SELECT * FROM programs WHERE code = 'NUTRITION'
   );
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
