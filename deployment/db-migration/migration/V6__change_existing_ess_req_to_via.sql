@@ -1,0 +1,1 @@
+UPDATE reqisitions SET programid = (SELECT id FROM programs WHERE code = 'VIA') WHERE programid = (SELECT id FROM programs WHERE code = 'ESS_MEDS');
