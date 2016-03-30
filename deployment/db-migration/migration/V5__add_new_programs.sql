@@ -148,9 +148,9 @@ INSERT INTO programs_supported (facilityId, programId, active, startDate) VALUES
 ((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'MALARIA'),TRUE,'9/20/2015'),
 ((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'PME'),TRUE,'9/20/2015'),
 ((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'NUTRITION'),TRUE,'9/20/2015'),
-((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'VIA'),TRUE,'9/20/2015');
+((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'VIA'),TRUE,'9/20/2015'),
 ((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'PTV'),TRUE,'9/20/2015'),
-((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'TARV'),TRUE,'9/20/2015'),
+((SELECT id FROM facilities WHERE code = 'HF9'), (SELECT id FROM programs WHERE code = 'TARV'),TRUE,'9/20/2015');
 
 UPDATE programs SET templateConfigured = FALSE WHERE id = (SELECT id FROM programs WHERE code = 'ESS_MEDS');
 
