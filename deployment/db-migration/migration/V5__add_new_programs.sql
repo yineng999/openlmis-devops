@@ -1,4 +1,4 @@
-UPDATE programs SET name = 'ESSENTIAL MEDICINE' WHERE code = 'ESS_MEDS';
+UPDATE programs SET name = 'Medicamentos Essenciais' WHERE code = 'ESS_MEDS';
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
   regimenTemplateConfigured, budgetingApplies, usesDar, push)
@@ -342,3 +342,8 @@ INSERT INTO role_assignments
 UPDATE role_assignments
   SET programId = (SELECT id FROM programs WHERE code = 'VIA')
   WHERE userId = (SELECT id FROM users WHERE username = 'DDM_Marracuene');
+
+UPDATE role_assignments
+  SET programId = (SELECT id FROM programs WHERE code = 'VIA')
+  WHERE userId = (SELECT id FROM users WHERE username = 'Admin123')
+  AND programID =  (SELECT id FROM programs WHERE code = 'ESS_MEDS');
