@@ -251,7 +251,7 @@ INSERT INTO role_assignments
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
+((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
 
 ((SELECT ID FROM USERS WHERE username = 'Mumemo'),
@@ -268,7 +268,7 @@ INSERT INTO role_assignments
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Mumemo'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
+((SELECT ID FROM USERS WHERE username = 'Mumemo'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
 
 ((SELECT ID FROM USERS WHERE username = 'Matalane'),
@@ -285,7 +285,7 @@ INSERT INTO role_assignments
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Matalane'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
+((SELECT ID FROM USERS WHERE username = 'Matalane'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
 
 ((SELECT ID FROM USERS WHERE username = 'Mumemo'),
@@ -302,7 +302,7 @@ INSERT INTO role_assignments
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Mumemo'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
+((SELECT ID FROM USERS WHERE username = 'Mumemo'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
 
 ((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
@@ -319,7 +319,7 @@ INSERT INTO role_assignments
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
+((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
 
 ((SELECT ID FROM USERS WHERE username = 'Michafutene'),
@@ -336,7 +336,24 @@ INSERT INTO role_assignments
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
 ((SELECT ID FROM USERS WHERE username = 'Michafutene'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
+((SELECT ID FROM USERS WHERE username = 'Michafutene'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
+
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
+  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
+((SELECT ID FROM USERS WHERE username = 'Machubo'),
   (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL);
 
 UPDATE role_assignments
