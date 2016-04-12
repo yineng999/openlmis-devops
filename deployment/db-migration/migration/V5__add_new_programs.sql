@@ -1,3 +1,41 @@
+CREATE OR REPLACE FUNCTION insert_into_role_assignments_by_user_name(uName VARCHAR(30))
+  RETURNS SETOF VOID AS
+$event$
+DECLARE
+  roleId       INTEGER;
+  programCodes VARCHAR(30) ARRAY;
+  pcode        VARCHAR(30);
+  userId       INTEGER;
+
+BEGIN
+
+  programCodes := ARRAY ['TEST_KIT', 'TB', 'PME', 'MALARIA', 'NUTRITION', 'VIA', 'PTV', 'TARV'];
+
+  SELECT id
+  FROM roles
+  WHERE name = 'Facility User'
+  INTO roleId;
+
+  SELECT id
+  FROM users
+  WHERE userName = uName
+  INTO userId;
+  IF userId IS NOT NULL
+  THEN
+    FOREACH pCode IN ARRAY programCodes LOOP
+
+      INSERT INTO role_assignments
+      (userId, roleId, programId, supervisoryNodeId) VALUES
+        (userId, roleId, (SELECT id
+                          FROM programs
+                          WHERE code = pcode), NULL);
+    END LOOP;
+  END IF;
+
+END;
+$event$ LANGUAGE plpgsql;
+
+
 UPDATE programs SET name = 'Medicamentos Essenciais' WHERE code = 'ESS_MEDS';
 
 INSERT INTO programs (code, name, description, active, templateConfigured,
@@ -186,175 +224,15 @@ UPDATE programs SET templateConfigured = TRUE WHERE id = (SELECT id FROM program
 UPDATE requisition_group_program_schedules SET programId = (SELECT id FROM programs WHERE code = 'VIA')
 WHERE requisitiongroupid = (SELECT id FROM requisition_groups WHERE code = 'RG2');
 
-INSERT INTO role_assignments
-(userId, roleId, programId, supervisoryNodeId) VALUES
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Marracuene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mali'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ricatla'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Ed-Mondlane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Matalane'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Mumemo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Habel-Jafar'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Michafutene'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL),
-
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TEST_KIT'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TB'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PTV'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'PME'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'MALARIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'NUTRITION'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'VIA'), NULL),
-((SELECT ID FROM USERS WHERE username = 'Machubo'),
-  (SELECT id FROM roles WHERE name = 'Facility User'), (SELECT id FROM programs WHERE code = 'TARV'), NULL);
+SELECT insert_into_role_assignments_by_user_name('Marracuene');
+SELECT insert_into_role_assignments_by_user_name('Mali');
+SELECT insert_into_role_assignments_by_user_name('Ricatla');
+SELECT insert_into_role_assignments_by_user_name('Ed-Mondlane');
+SELECT insert_into_role_assignments_by_user_name('Mumemo');
+SELECT insert_into_role_assignments_by_user_name('Matalane');
+SELECT insert_into_role_assignments_by_user_name('Habel-Jafar');
+SELECT insert_into_role_assignments_by_user_name('Michafutene');
+SELECT insert_into_role_assignments_by_user_name('Machubo');
 
 UPDATE role_assignments
   SET programId = (SELECT id FROM programs WHERE code = 'VIA')
