@@ -2,3 +2,4 @@
 dbhost_master: xx.31.xx.20
 dbhost_slave: xx.31.xx.119
 dbport: 5432
+nfs_server_host: xx.xx.xx.xx

@@ -1,0 +1,12 @@
+---
+- hosts: nfs-server
+  connection: ssh
+  sudo: yes
+  roles:
+    - nfs_server
+
+- hosts: nfs-client
+  connection: ssh
+  sudo: yes
+  roles:
+    - nfs_client
