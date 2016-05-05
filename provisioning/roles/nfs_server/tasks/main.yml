@@ -3,7 +3,7 @@
       apt: update-cache=yes cache_valid_time=86400
       sudo: yes
 
-    - name: Install nfs-kernal-server
+    - name: Install nfs-kernel-server
       sudo: yes
       apt: pkg=nfs-kernel-server state=latest
 
