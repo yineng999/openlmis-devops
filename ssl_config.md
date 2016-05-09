@@ -33,6 +33,8 @@ $ ./letsencrypt-auto certonly
 
 It would raise up and interaction window and you should choose `2 Automatically use a temporary webserver (standalone)`. Then input the domain name `mydomain.com` in the input field.
 
+If you got the error `Failed to connect to host for DVSNI challenge.`, try to open 443 port first `sudo ufw allow 443/tcp`.
+
 ```
 /etc/letsencrypt/live/mydomain.com
 ```
