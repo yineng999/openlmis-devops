@@ -1,0 +1,29 @@
+#!/bin/bash
+export LC_ALL=C
+/home/ubuntu/letsencrypt/letsencrypt-auto renew --force-renew -nvv --standalone > /var/log/letsencrypt/renew.log 2>&1
+LE_STATUS=$?
+if [ "$LE_STATUS" != 0 ]; then
+    echo Automated renewal failed:
+    cat /var/log/letsencrypt/renew.log
+    exit 1
+fi
+
+openssl pkcs12 -export -in /etc/letsencrypt/live/domain_name/fullchain.pem -inkey /etc/letsencrypt/live/lmis-qa.cmam.gov.mz/privkey.pem -out fullchain_and_key.p12 -name tomcat -passout pass:your_password
+OS_STATUS=$?
+if [ "$OS_STATUS" != 0 ]; then
+    echo "OpenSSL export failed"
+    exit 1
+fi
+
+mv /app/tomcat/server/conf/clientkeystore.jks /app/tomcat/server/conf/clientkeystore.jks.bak
+keytool -importkeystore -deststorepass your_password -destkeypass your_password -destkeystore /app/tomcat/server/conf/clientkeystore.jks -srckeystore fullchain_and_key.p12 -srcstoretype PKCS12 -srcstorepass your_password -alias tomcat
+KT_STATUS=$?
+if [ "$KT_STATUS" != 0 ]; then
+    echo "keytool generation failed"
+    mv /app/tomcat/server/conf/clientkeystore.jks.bak /app/tomcat/server/conf/clientkeystore.jks
+    exit 1
+else
+    chown middleware: /app/tomcat/server/conf/clientkeystore.jks
+fi
+
+service tomcat restart
