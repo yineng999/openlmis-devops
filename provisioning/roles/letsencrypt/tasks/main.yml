@@ -1,0 +1,24 @@
+---
+    - name: Download letsencrypt
+      command: git clone https://github.com/letsencrypt/letsencrypt
+
+    - name: Generate certificate
+      sudo: yes
+      command: /home/ubuntu/letsencrypt/letsencrypt-auto certonly --standalone -d {{ domain_name }} --email lmis.open@gmail.com --agree-tos
+
+    - name: Export ssl key
+      sudo: yes
+      command: openssl pkcs12 -export -in /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem -inkey /etc/letsencrypt/live/{{ domain_name }}/privkey.pem -out fullchain_and_key.p12 -name tomcat -passout pass:{{ ssl_password }}
+
+    - name: Move existing keystore
+      sudo: yes
+      command: mv /app/tomcat/server/conf/{{ keystore_name }} /app/tomcat/server/conf/{{ keystore_name }}.bak
+
+    - name: Generate keystore
+      sudo: yes
+      command: keytool -importkeystore -deststorepass {{ ssl_password }} -destkeypass {{ ssl_password }} -destkeystore /app/tomcat/server/conf/{{ keystore_name }} -srckeystore fullchain_and_key.p12 -srcstoretype PKCS12 -srcstorepass {{ ssl_password }} -alias tomcat
+
+    - name: Restart tomcat service
+      service: name=tomcat state=restarted
+
+    # If tomcat has not configured with an existing keystore, or the keystore name / password changes, you need to replace server.xml in tomcat conf.

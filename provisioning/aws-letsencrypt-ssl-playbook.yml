@@ -1,0 +1,6 @@
+---
+- hosts: prodsim
+  connection: ssh
+  sudo: yes
+  roles:
+    - letsencrypt
