@@ -1,6 +1,16 @@
 ---
-- hosts: prodsim
+- hosts: test-master
   connection: ssh
   sudo: yes
   roles:
     - letsencrypt
+  vars:
+    region: master
+
+- hosts: test-slave
+  connection: ssh
+  sudo: yes
+  roles:
+    - letsencrypt
+  vars:
+    region: slave

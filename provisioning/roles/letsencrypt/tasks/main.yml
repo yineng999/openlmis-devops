@@ -1,10 +1,44 @@
 ---
+    - name: Check if letsencrypt download exists
+      stat: path=/home/ubuntu/letsencrypt
+      register: stat_result
+
+    - name: Check if letsencrypt domain folder exists
+      stat: path=/etc/letsencrypt/live/{{ domain_name }}
+      register: stat_result2
+
+    - name: Check if letsencrypt live folder exists
+      stat: path=/etc/letsencrypt/live
+      register: stat_result3
+
     - name: Download letsencrypt
       command: git clone https://github.com/letsencrypt/letsencrypt
+      when: region == 'master' and stat_result.stat.exists == False
 
     - name: Generate certificate
       sudo: yes
       command: /home/ubuntu/letsencrypt/letsencrypt-auto certonly --standalone -d {{ domain_name }} --email lmis.open@gmail.com --agree-tos
+      when: region == "master" and stat_result2.stat.exists == False
+
+    - name: Update exports file
+      sudo: yes
+      copy: src=exports dest=/etc/exports
+      when: region == "master" and stat_result3.stat.exists == False
+
+    - name: Restart NFS server
+      sudo: yes
+      command: service nfs-kernel-server restart
+      when: region == "master" and stat_result3.stat.exists == False
+
+    - name: Create letsencrypt folder on client
+      sudo: yes
+      command: mkdir -p /etc/letsencrypt
+      when: region == "slave" and stat_result3.stat.exists == False
+
+    - name: Mount letsencrypt share folder
+      sudo: yes
+      command: mount {{ nfs_server_host }}:/etc/letsencrypt /etc/letsencrypt
+      when: region == "slave" and stat_result3.stat.exists == False
 
     - name: Export ssl key
       sudo: yes
@@ -20,5 +54,31 @@
 
     - name: Restart tomcat service
       service: name=tomcat state=restarted
+
+    - name: Auto-renew script for master
+      sudo: yes
+      copy: src=auto_renew_ssl_master dest=/home/ubuntu owner=root group=root mode=0744
+      when: region == "master"
+
+    - name: Auto-renew script for slave
+      sudo: yes
+      copy: src=auto_renew_ssl_slave dest=/home/ubuntu owner=root group=root mode=0744
+      when: region == "slave"
+
+    - name: Creates auto renew certificate job for master
+      sudo: yes
+      cron: minute="0" hour="0" day="1" month="*/2" weekday="*"
+            name="auto renew certificate"
+            user="root"
+            job="/home/ubuntu/auto_renew_ssl_master"
+      when: region == "master"
+
+    - name: Creates auto renew certificate job for slave
+      sudo: yes
+      cron: minute="30" hour="0" day="1" month="*/2" weekday="*"
+            name="auto renew certificate"
+            user="root"
+            job="/home/ubuntu/auto_renew_ssl_slave"
+      when: region == "slave"
 
     # If tomcat has not configured with an existing keystore, or the keystore name / password changes, you need to replace server.xml in tomcat conf.
