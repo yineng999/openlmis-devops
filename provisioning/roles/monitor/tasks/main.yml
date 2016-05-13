@@ -38,5 +38,8 @@
 - name: put nrpe config in appropriate location
   template: src=nrpe.cfg dest=/etc/nagios/nrpe.cfg owner=nagios group=nagios mode=0755
 
+- name: allow check http command to take parameters
+  template: src=nrpe_local.cfg dest=/etc/nagios/nrpe_local.cfg
+
 - name: restart nagios nrpe
   service: name=nagios-nrpe-server state=restarted
