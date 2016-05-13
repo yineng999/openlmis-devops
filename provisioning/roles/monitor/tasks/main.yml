@@ -35,8 +35,8 @@
 - name: Change file executable
   file: path=/usr/lib/nagios/plugins owner=nagios group=nagios mode=0755 state=directory
 
-- name: Comment default hardcoded commands present inside nrpe.cfg
-  template: src=nrpe.cfg.properties dest=/etc/nagios/nrpe.cfg owner=nagios group=nagios mode=0755
+- name: put nrpe config in appropriate location
+  template: src=nrpe.cfg dest=/etc/nagios/nrpe.cfg owner=nagios group=nagios mode=0755
 
 - name: restart nagios nrpe
   service: name=nagios-nrpe-server state=restarted
