@@ -3,14 +3,17 @@
 
     - name: Check if letsencrypt download exists
       stat: path=/home/ubuntu/letsencrypt
+      sudo: yes
       register: stat_result
 
     - name: Check if letsencrypt domain folder exists
       stat: path=/etc/letsencrypt/live/{{ domain_name }}
+      sudo: yes
       register: stat_result2
 
     - name: Check if letsencrypt live folder exists
       stat: path=/etc/letsencrypt/live
+      sudo: yes
       register: stat_result3
 
     - name: Download letsencrypt
@@ -44,7 +47,7 @@
 
     - name: Auto-renew script for master
       sudo: yes
-      copy: src=auto_renew_ssl dest=/home/ubuntu owner=root group=root mode=0744
+      copy: src=auto_renew_ssl dest=/home/ubuntu owner=root group=root mode=0744 force=no
 
     - name: Creates auto renew certificate job for master
       sudo: yes
@@ -54,9 +57,11 @@
             job="/home/ubuntu/auto_renew_ssl"
 
     - name: Upload certificate to AWS
+      sudo: yes
       command: aws iam upload-server-certificate --server-certificate-name {{ cert_name }} --certificate-body file:///etc/letsencrypt/live/{{ domain_name }}/cert.pem --private-key file:///etc/letsencrypt/live/{{ domain_name }}/privkey.pem
 
     - name: Replace certificate on ELB
+      sudo: yes
       command: aws elb set-load-balancer-listener-ssl-certificate --load-balancer-name {{ elb_name }} --load-balancer-port 443 --ssl-certificate-id {{ arn_cert }}
 
 
