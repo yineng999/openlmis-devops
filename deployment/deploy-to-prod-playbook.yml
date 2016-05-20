@@ -1,5 +1,5 @@
 ---
-- hosts: prodweb
+- hosts: prodweb-master
   connection: ssh
   sudo: yes
   roles:
@@ -9,4 +9,16 @@
     - cubes
     - db-migration
   vars:
-    region: prod
+    region: prod-master
+
+- hosts: prodweb-slave
+  connection: ssh
+  sudo: yes
+  roles:
+    - configuration
+    - flyway
+    - package
+    - cubes
+    - db-migration
+  vars:
+    region: prod-slave

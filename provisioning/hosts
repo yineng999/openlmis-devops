@@ -2,13 +2,15 @@
 qa
 ci
 local
-prodweb
+prodweb-master
+prodweb-slave
 
 [servers:children]
 qa
 ci
 local
-prodweb
+prodweb-master
+prodweb-slave
 
 [qa]
 x.x.x.x nickname=qa vm=1
@@ -20,10 +22,11 @@ localhost nickname=ci vm=1
 x.x.x.x nickname=local vm=1
 
 
-[prodweb]
-x.x.x.x nickname=webserver1 vm=1
-x.x.x.x nickname=webserver2 vm=1
+[prodweb-master]
+xx.xx.xx.xx
 
+[prodweb-slave]
+xx.xx.xx.xx
 
 [proddb]
 x.x.x.x nickname=db1 vm=1

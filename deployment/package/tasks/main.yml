@@ -1,27 +1,43 @@
-- name: Step 1 > Download WAR package
+- name: Download WAR package
   command: "wget -O {{application_dir}}/{{application_name}}/artifact/openlmis-web.war
     --auth-no-challenge
     --http-user={{jenkins_user}}
     --no-check-certificate
     --http-password=b5c5990592a49e0df211b0e704d3bdd0
     https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
+  when: region == 'prod-master'
 
-- name: Step 2 > Stop tomcat service
+- name: Download WAR package for slave
+  command: "wget -O {{application_dir}}/{{application_name}}/artifact/openlmis-web-slave.war
+    --auth-no-challenge
+    --http-user={{jenkins_user}}
+    --no-check-certificate
+    --http-password=b5c5990592a49e0df211b0e704d3bdd0
+    https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web-slave.war"
+  when: region == 'prod-slave'
+
+- name: Stop tomcat service
   service: name=tomcat state=stopped
 
-- name: Step 3 > Move previous deployment artifact to artifact_last directory
+- name: Move previous deployment artifact to artifact_last directory
   command: "mv {{application_dir}}/{{application_name}}/webapps/ROOT.war
   {{application_dir}}/{{application_name}}/artifact_last/"
   ignore_errors: yes
   sudo_user: middleware
 
-- name: Step 4 > Move previous deployment cache
+- name: Move previous deployment cache
   command: "rm -rf {{application_dir}}/{{application_name}}/webapps/ROOT"
   sudo_user: middleware
 
-- name: Step 5 > Copy current deployment artifact
+- name: Copy current deployment artifact
   command: "cp {{application_dir}}/{{application_name}}/artifact/openlmis-web.war {{application_dir}}/{{application_name}}/webapps/ROOT.war"
   sudo_user: middleware
+  when: region == 'prod-master'
+
+- name: Copy current deployment artifact
+  command: "cp {{application_dir}}/{{application_name}}/artifact/openlmis-web-slave.war {{application_dir}}/{{application_name}}/webapps/ROOT.war"
+  sudo_user: middleware
+  when: region == 'prod-slave'
 
 - name: Update application version in app properties
   command: "echo 'app.version={{BUILD_NO}}' >> {{application_dir}}/{{application_name}}/properties/app.properties"
