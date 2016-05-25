@@ -6,9 +6,9 @@ This readme will detail the development team process when a release is problemat
 
 If a release has critical issues, and the release does not include any data migrations, we can simply roll back the release:
 
-Web: use the rollback script on web server side and roll back to the previous version.
+Web: checkout to the previous version tag and re-build in Jenkins, and deploy using ansible script
 
-$ `ansible-playbook -u xxx -private-key=xxx -i provisioning/hosts deployment/rollback-prod-playbook.yml`
+$ `ansible-playbook -u xxx -private-key=xxx -i provisioning/hosts --extra-vars '{"BUILD_NO":"xx", "DBPASSWORD":"[DB_PASSWORD]"}' deployment/deploy-to-prod-playbook.yml`
 
 App: use the previous app apk and update the version number to the newest. Push to app store.
 
@@ -22,9 +22,9 @@ Build the jenkins job android-hot-deploy
 
 If a release has critical issues, and the release includes data migrations (either on web side or app side), and the critical issues are with the new features:
 
-Web: turn off the feature toggle for the problematic new features, and release again.
+Web: turn off the feature toggle for the problematic new features (in app.properties), and release again.
 
-On the servers, find app.properties and switch the features with problems to "false". Restart tomcat.
+$ `ansible-playbook -u xxx -private-key=xxx -i provisioning/hosts --extra-vars '{"BUILD_NO":"xx", "DBPASSWORD":"[DB_PASSWORD]"}' deployment/deploy-to-prod-playbook.yml`
 
 App: turn off the feature toggle for the problematic new features, and release again.
 
