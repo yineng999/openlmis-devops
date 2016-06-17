@@ -58,38 +58,32 @@ WHERE
 
 UPDATE products
 SET primaryName = 'Clorexidina 1.5% + Cetrimida 15%,500ml. Frasco',
-    strength = '1.5% + 15%,500ml',
-    formId = 48
+    strength = '1.5% + 15%,500ml'
 WHERE code = '20A05';
 
 UPDATE products
 SET primaryName = 'Diazepam 5mg/ml,2ml,Ampolas',
-    strength = '5mg/ml, 2ml',
-    formId = 3
+    strength = '5mg/ml, 2ml'
 WHERE code = '07I07';
 
 UPDATE products
 SET primaryName = 'Sulfato Ferroso 300mg (Eq to 97.5mg Fe) + Acido Folico 1mg, comprimidos',
-    strength = '300mg + 1mg',
-    formId = 1
+    strength = '300mg + 1mg'
 WHERE code = '06A07';
 
 UPDATE products
 SET primaryName = 'Saquetas para Comprimidos, 100x150x0.05mm',
-    strength = '100x150x0.05mm',
-    formId = 1
+    strength = '100x150x0.05mm'
 WHERE code = '26B03';
 
 UPDATE products
 SET primaryName = 'Tetraciclina HCI 1%, 5g, pomada para vista,tubos',
-    strength = '1%, 5g',
-    formId = 15
+    strength = '1%, 5g'
 WHERE code = '17C07';
 
 UPDATE products
 SET primaryName = 'Agua para injeccao, 10ml, ampolas',
-    strength = '10ml',
-    formId = 3
+    strength = '10ml'
 WHERE code = '11A0XX';
 
 
