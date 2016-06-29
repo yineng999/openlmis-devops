@@ -38,16 +38,3 @@
   -locations=filesystem:{{flyway_install_dir}}/sql/db
   -X
   migrate"
-
-- name: Step 6 > migrate migration module
-  command: "{{flyway_install_dir}}/flyway
-  -url=jdbc:postgresql://{{dbhost_master}}:{{dbport}}/{{dbname}}
-  -schemas=public,atomfeed
-  -user={{dbuser}}
-  -password={{DBPASSWORD}}
-  -table=migration_schema_version
-  -placeholderReplacement=false
-  -baselineOnMigrate=true
-  -locations=filesystem:{{flyway_install_dir}}/sql/migration
-  -X
-  migrate"
