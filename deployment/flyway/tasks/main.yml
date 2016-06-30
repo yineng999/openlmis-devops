@@ -1,31 +1,20 @@
 - name: Step 1 > Download db script
-  command: "wget -O {{application_dir}}/{{application_name}}/db/{{item}}.jar --auth-no-challenge
+  command: "wget -O {{application_dir}}/{{application_name}}/db/db.jar --auth-no-challenge
       --http-user={{jenkins_user}}
       --no-check-certificate
       --http-password=b5c5990592a49e0df211b0e704d3bdd0
-      https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/{{item}}/build/libs/{{item}}.jar"
-
-  with_items:
-      - db
-      - migration
+      https://{{jenkins_host}}/job/Lmis-cubes-merge/{{BUILD_NO}}/artifact/open-lmis/modules/db/build/libs/db.jar"
 
 - name: Step 2 > Remove the dirctories of sql instance
   command: "rm -rf {{flyway_install_dir}}/sql/{{item}}"
   with_items:
       - db
-      - migration
 
 - name: Step 3 > Initialize the dirctories of sql instance
-  file: path={{flyway_install_dir}}/sql/{{item}} mode=0755 state=directory
-  with_items:
-      - db
-      - migration
+  file: path={{flyway_install_dir}}/sql/db mode=0755 state=directory
 
 - name: Step 4 > Unzip Sql file jar
-  command: "unzip {{application_dir}}/{{application_name}}/db/{{item}}.jar -d {{flyway_install_dir}}/sql/{{item}}"
-  with_items:
-      - db
-      - migration
+  command: "unzip {{application_dir}}/{{application_name}}/db/db.jar -d {{flyway_install_dir}}/sql/db"
 
 - name: Step 5 > migrate db module
   command: "{{flyway_install_dir}}/flyway

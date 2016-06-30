@@ -4,7 +4,7 @@
     --http-user={{jenkins_user}}
     --no-check-certificate
     --http-password=b5c5990592a49e0df211b0e704d3bdd0
-    https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
+    https://{{jenkins_host}}/job/Lmis-cubes-merge/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
   when: region != 'prod-slave'
 
 - name: Download WAR package for slave
@@ -13,7 +13,7 @@
     --http-user={{jenkins_user}}
     --no-check-certificate
     --http-password=b5c5990592a49e0df211b0e704d3bdd0
-    https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web-slave.war"
+    https://{{jenkins_host}}/job/Lmis-cubes-merge/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web-slave.war"
   when: region == 'prod-slave'
 
 - name: Stop tomcat service

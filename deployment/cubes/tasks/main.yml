@@ -7,7 +7,7 @@
       --no-check-certificate
       --http-user={{jenkins_user}}
       --http-password=b5c5990592a49e0df211b0e704d3bdd0
-      https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/cubes.zip"
+      https://{{jenkins_host}}/job/Lmis-cubes-merge/{{BUILD_NO}}/artifact/cubes.zip"
 
   - name: Step 2 > Stop cubes service
     service: name=cubes state=stopped
