@@ -6,9 +6,7 @@
       https://{{jenkins_host}}/job/Lmis-cubes-merge/{{BUILD_NO}}/artifact/open-lmis/modules/db/build/libs/db.jar"
 
 - name: Step 2 > Remove the dirctories of sql instance
-  command: "rm -rf {{flyway_install_dir}}/sql/{{item}}"
-  with_items:
-      - db
+  command: "rm -rf {{flyway_install_dir}}/sql/db"
 
 - name: Step 3 > Initialize the dirctories of sql instance
   file: path={{flyway_install_dir}}/sql/db mode=0755 state=directory
@@ -24,6 +22,6 @@
   -password={{DBPASSWORD}}
   -table=schema_version
   -placeholderReplacement=false
-  -locations=filesystem:{{flyway_install_dir}}/sql/db
+  -locations=filesystem:{{flyway_install_dir}}/sql/db/db/migration
   -X
   migrate"
