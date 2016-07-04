@@ -6,9 +6,10 @@
     - syncdata
     - configuration
     - password
-    - db-migration
+    - one-time-script
     - flyway
     - package
     - cubes
+    - db-migration
   vars:
     region: prodsim

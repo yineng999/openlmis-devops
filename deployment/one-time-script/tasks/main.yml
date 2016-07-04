@@ -1,0 +1,5 @@
+- name: Copy one time migrations script for merge 2.0
+  copy: src=one-time-script/scripts/merge_2.0_migrations.sql dest=/home/ubuntu/merge_2.0_migrations.sql
+
+- name: Run one time script
+  command: "psql {{dbname}} -U {{dbuser}} -h {{dbhost_master}} -p {{dbport}} --file /home/ubuntu/merge_2.0_migrations.sql"
