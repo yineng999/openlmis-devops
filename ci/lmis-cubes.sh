@@ -1,0 +1,1 @@
+zip -r cubes.zip bin/ models/
