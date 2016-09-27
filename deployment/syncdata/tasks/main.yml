@@ -17,7 +17,7 @@
   sudo_user: postgres
 
 - name: Load anonymized prod data
-  command: "psql {{dbname}} -U {{dbuser}} --file {{prod_data_without_MV_file_location}}"
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/dumpWithoutMVForProdSim.sql"
   sudo_user: postgres
 
 - name: Change passwords
