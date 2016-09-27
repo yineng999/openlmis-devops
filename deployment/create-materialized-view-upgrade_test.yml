@@ -1,0 +1,8 @@
+---
+- hosts: upgrade_test
+  connection: ssh
+  sudo: yes
+  roles:
+    - create-materialized-view
+  vars:
+    region: upgrade_test
