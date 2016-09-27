@@ -15,3 +15,4 @@ def replace_email(file_path):
     move(abs_path, file_path)
 
 replace_email("dumpForProdSim.sql")
+replace_email("dumpWithoutMVForProdSim.sql")
