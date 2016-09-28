@@ -1,7 +1,7 @@
 DROP MATERIALIZED VIEW IF EXISTS vw_daily_full_soh;
-
 CREATE MATERIALIZED VIEW vw_daily_full_soh AS
-  (SELECT DISTINCT ON (facility_code, drug_code, occurred)
+  (SELECT
+     DISTINCT ON (facility_code, drug_code, occurred)
      facilities.name                                                          AS facility_name,
      facilities.code                                                          AS facility_code,
 
@@ -19,7 +19,10 @@ CREATE MATERIALIZED VIEW vw_daily_full_soh AS
 
      occurred,
      stock_cards.modifieddate                                                 AS last_sync_date,
-     cmm_at_day(facilities.id, products.code, occurred)                       AS cmm
+     cmm_at_day(facilities.id, products.code, occurred)                       AS cmm,
+
+     uuid_in(md5(random() :: TEXT || now() :: TEXT) :: cstring)               AS uuid
+
    FROM stock_card_entries
      JOIN stock_cards ON stock_card_entries.stockcardid = stock_cards.id
      JOIN products ON stock_cards.productid = products.id
