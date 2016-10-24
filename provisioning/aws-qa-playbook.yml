@@ -1,5 +1,5 @@
 ---
-- hosts: qa
+- hosts: qa-master
   connection: ssh
   sudo: yes
   roles:
@@ -11,4 +11,15 @@
     - cubes
     - phantom
   vars:
-    region: qa
+    region: qa-master
+
+- hosts: qa-slave
+  connection: ssh
+  sudo: yes
+  roles:
+    - base
+    - tomcat
+    - cubes
+    - phantom
+  vars:
+    region: qa-slave

@@ -5,7 +5,7 @@
     --no-check-certificate
     --http-password=b5c5990592a49e0df211b0e704d3bdd0
     https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web.war"
-  when: region != 'prod-slave'
+  when: region != 'prod-slave' and region != 'qa-slave'
 
 - name: Download WAR package for slave
   command: "wget -O {{application_dir}}/{{application_name}}/artifact/openlmis-web-slave.war
@@ -14,7 +14,7 @@
     --no-check-certificate
     --http-password=b5c5990592a49e0df211b0e704d3bdd0
     https://{{jenkins_host}}/job/Lmis-cubes/{{BUILD_NO}}/artifact/open-lmis/modules/openlmis-web/build/libs/openlmis-web-slave.war"
-  when: region == 'prod-slave'
+  when: region == 'prod-slave' or region == 'qa-slave'
 
 - name: Stop tomcat service
   service: name=tomcat state=stopped
@@ -32,12 +32,12 @@
 - name: Copy current deployment artifact
   command: "cp {{application_dir}}/{{application_name}}/artifact/openlmis-web.war {{application_dir}}/{{application_name}}/webapps/ROOT.war"
   sudo_user: middleware
-  when: region != 'prod-slave'
+  when: region != 'prod-slave' and region != 'qa-slave'
 
 - name: Copy current deployment artifact
   command: "cp {{application_dir}}/{{application_name}}/artifact/openlmis-web-slave.war {{application_dir}}/{{application_name}}/webapps/ROOT.war"
   sudo_user: middleware
-  when: region == 'prod-slave'
+  when: region == 'prod-slave' or region == 'qa-slave'
 
 - name: Update application version in app properties
   command: "echo 'app.version={{BUILD_NO}}' >> {{application_dir}}/{{application_name}}/properties/app.properties"

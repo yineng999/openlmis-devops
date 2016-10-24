@@ -1,5 +1,5 @@
 ---
-- hosts: qa
+- hosts: qa-master
   connection: ssh
   sudo: yes
   roles:
@@ -9,4 +9,14 @@
     - cubes
     - db-migration
   vars:
-    region: qa
+    region: qa-master
+
+- hosts: qa-slave
+  connection: ssh
+  sudo: yes
+  roles:
+    - configuration
+    - package
+    - cubes
+  vars:
+    region: qa-slave

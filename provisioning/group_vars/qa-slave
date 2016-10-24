@@ -1,0 +1,4 @@
+---
+dbhost_master: xx.xx.xx.xx
+dbhost_slave: xx.xx.xx.xx
+dbport: 5432

@@ -1,7 +1,11 @@
 ---
 - name: Copy region dependent files
   copy: "src=env//{{region}}/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644"
-  when: region != 'prod-master' and region != 'prod-slave'
+  when: region != 'prod-master' and region != 'prod-slave' and region != 'qa-master' and region != 'qa-slave'
+
+- name: Copy region dependent files for QA
+  copy: "src=env//qa/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644"
+  when: region == 'qa-master' or region == 'qa-slave'
 
 - name: Copy region dependent files for prod
   copy: "src=env//prod/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644"
