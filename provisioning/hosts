@@ -5,6 +5,9 @@ ci
 local
 prodweb-master
 prodweb-slave
+demo
+showcase
+prodsim
 
 [servers:children]
 qa-master

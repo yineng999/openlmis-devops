@@ -10,6 +10,8 @@
     - flyway
     - cubes
     - phantom
+    - nfs_server
+    - letsencrypt
   vars:
     region: qa-master
 
@@ -21,5 +23,6 @@
     - tomcat
     - cubes
     - phantom
+    - nfs_client
   vars:
     region: qa-slave

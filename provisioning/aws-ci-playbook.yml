@@ -16,5 +16,6 @@
     - ansible-role-ruby
     - cubes
     - phantom
+    - monitor
   vars:
     region: ci

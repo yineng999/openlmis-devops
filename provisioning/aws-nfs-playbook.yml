@@ -1,6 +1,0 @@
----
-- hosts: test
-  connection: ssh
-  sudo: yes
-  roles:
-    - letsencrypt
