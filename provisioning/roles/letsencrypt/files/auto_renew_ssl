@@ -9,6 +9,5 @@ if [ "$LE_STATUS" != 0 ]; then
 fi
 
 CERT_NAME="cert-$(date +%H%M%S%d%m%y)"
-aws iam upload-server-certificate --server-certificate-name $CERT_NAME --certificate-body file:///etc/letsencrypt/live/lmis1.cuipengfei.me/cert.pem --private-key file:///etc/letsencrypt/live/lmis1.cuipengfei.me/privkey.pem
-
+aws iam upload-server-certificate --server-certificate-name $CERT_NAME --certificate-body file:///etc/letsencrypt/live/lmis1.cuipengfei.me/cert.pem --private-key file:///etc/letsencrypt/live/lmis1.cuipengfei.me/privkey.pem --certificate-chain file:///etc/letsencrypt/live/lmis1.cuipengfei.me/fullchain.pem
 aws elb set-load-balancer-listener-ssl-certificate --load-balancer-name test2 --load-balancer-port 443 --ssl-certificate-id arn:aws:iam::745786580020:server-certificate/$CERT_NAME
