@@ -58,7 +58,7 @@
 
     - name: Upload certificate to AWS
       sudo: yes
-      command: aws iam upload-server-certificate --server-certificate-name {{ cert_name }} --certificate-body file:///etc/letsencrypt/live/{{ domain_name }}/cert.pem --private-key file:///etc/letsencrypt/live/{{ domain_name }}/privkey.pem
+      command: aws iam upload-server-certificate --server-certificate-name {{ cert_name }} --certificate-body file:///etc/letsencrypt/live/{{ domain_name }}/cert.pem --private-key file:///etc/letsencrypt/live/{{ domain_name }}/privkey.pem --certificate-chain file:///etc/letsencrypt/live/{{ domain_name }}/fullchain.pem
 
     - name: Replace certificate on ELB
       sudo: yes
