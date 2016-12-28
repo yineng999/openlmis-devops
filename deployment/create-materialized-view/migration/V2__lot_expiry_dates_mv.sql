@@ -1,3 +1,5 @@
+DROP MATERIALIZED VIEW IF EXISTS vw_lot_daily_full_soh;
+
 DROP MATERIALIZED VIEW IF EXISTS vw_lot_expiry_dates;
 
 CREATE MATERIALIZED VIEW vw_lot_expiry_dates AS

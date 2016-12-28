@@ -1,5 +1,3 @@
-DROP MATERIALIZED VIEW IF EXISTS vw_lot_daily_full_soh;
-
 CREATE MATERIALIZED VIEW vw_lot_daily_full_soh AS
   (SELECT DISTINCT ON (facility_code, drug_code, occurred_date)
      vw_lot_expiry_dates.stock_card_entry_id                                    AS stock_card_entry_id,
