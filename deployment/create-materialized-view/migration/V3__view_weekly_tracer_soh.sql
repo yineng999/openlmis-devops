@@ -1,5 +1,3 @@
-DROP MATERIALIZED VIEW IF EXISTS vw_weekly_tracer_soh;
-
 CREATE MATERIALIZED VIEW vw_weekly_tracer_soh AS
 (SELECT
  uuid_in(md5(random() :: TEXT || now() :: TEXT) :: cstring) AS uuid,

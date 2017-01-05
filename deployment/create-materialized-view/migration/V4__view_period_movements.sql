@@ -1,5 +1,3 @@
-DROP MATERIALIZED VIEW IF EXISTS vw_period_movements;
-
 CREATE MATERIALIZED VIEW vw_period_movements AS
   (SELECT
      uuid_in(md5(random() :: TEXT || now() :: TEXT) :: cstring) AS uuid,
