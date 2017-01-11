@@ -20,11 +20,6 @@
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/dumpWithoutMVForProdSim.sql"
   sudo_user: postgres
 
-#temporary for prodsim before we deploy V703 migration to prod
-- name: Insert migration version
-  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/insert_migration_V703.sql"
-  sudo_user: postgres
-
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file change_passwords.sql"
 
